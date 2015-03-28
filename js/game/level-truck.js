@@ -23,11 +23,11 @@ define(function (require) {
     var fruits = [];
 
     fruits.push(FruitEntity(world, 'apple', { x: 200, y: 130 }));
-    fruits.push(FruitEntity(world, 'apple', { x: 300, y: 100 }));
-    fruits.push(FruitEntity(world, 'apple', { x: 400, y: 120 }));
-    fruits.push(FruitEntity(world, 'apple', { x: 500, y: 80 }));
-    fruits.push(FruitEntity(world, 'apple', { x: 600, y: 80 }));
-    fruits.push(FruitEntity(world, 'apple', { x: 700, y: 100 }));
+    fruits.push(FruitEntity(world, 'orange', { x: 300, y: 100 }));
+    fruits.push(FruitEntity(world, 'banana', { x: 400, y: 120 }));
+    fruits.push(FruitEntity(world, 'banana', { x: 500, y: 80 }));
+    fruits.push(FruitEntity(world, 'strawberry', { x: 600, y: 80 }));
+    fruits.push(FruitEntity(world, 'blueberry', { x: 700, y: 100 }));
     fruits.push(FruitEntity(world, 'apple', { x: 800, y: 100 }));
 
     state.update(function () {
