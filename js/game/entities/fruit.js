@@ -1,24 +1,28 @@
 define(function (require) {
 
-    var Facade = require('facade');
+    var Facade = require('facade'),
+        Entity = require('./entity');
 
     require('facadejs-Box2D-plugin');
 
-    return function (world, options) {
+    function Fruit(world, options) {
 
-        var fruit = new Facade.Circle({ radius: 15, fillStyle: 'red', anchor: 'center' });
-
-        fruit.setOptions(options);
-
-        fruit.Box2D('createObject', world, {
-            type: 'dynamic',
-            rotate: true,
-            density: 1.0,
-            restitution: 1.0
-        });
+        var fruit = new Entity(world, Facade.Circle({
+                radius: 15,
+                fillStyle: 'red',
+                anchor: 'center'
+            }),
+            options,
+            {
+                type: 'dynamic',
+                rotate: true,
+                density: 1.0,
+                restitution: 1.0
+            }
+        );
 
         return fruit;
+    };
 
-    }
-
+    return Fruit;
 });

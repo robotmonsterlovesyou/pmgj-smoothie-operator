@@ -7,7 +7,7 @@ define(function (require) {
 
     var game = require('./game');
 
-    var fruitEntity = require('./entities/fruit');
+    var FruitEntity = require('./entities/fruit');
 
     var state = new Plastick.State('level');
 
@@ -21,13 +21,12 @@ define(function (require) {
 
     var fruits = [];
 
-    fruits.push(fruitEntity(world, { x: 100, y: 50 }));
-    fruits.push(fruitEntity(world, { x: 200, y: 0 }));
-    fruits.push(fruitEntity(world, { x: 300, y: 50 }));
-    fruits.push(fruitEntity(world, { x: 400, y: 75 }));
-    fruits.push(fruitEntity(world, { x: 500, y: -50 }));
-    fruits.push(fruitEntity(world, { x: 600, y: 200 }));
-    fruits.push(fruitEntity(world, { x: 700, y: 0 }));
+    for ( var i = 0; i < 7; i += 1) {
+        fruits.push( new FruitEntity(world, {
+            x: 100 * (i + 1),
+            y: Math.random() * 250 - 50
+        }));
+    }
 
     state.update(function () {
 
@@ -41,7 +40,7 @@ define(function (require) {
 
         game.stage.clear();
         game.stage.addToStage(platform);
-        game.stage.addToStage(fruits);
+        for (var fruit = 0; fruit < fruit.length; fruit += 1) fruit.draw(game.stage);
 
         world.Box2D('drawDebug');
 
