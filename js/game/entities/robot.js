@@ -5,13 +5,11 @@ define(function (require) {
 
     require('facadejs-Box2D-plugin');
 
-    function Fruit(world, options) {
+    function Robot(world, options) {
 
-        var fruit = new Entity(
-            world,
-            Facade.Circle({
+        var robot = new Entity(world, Facade.Circle({
                 radius: 30,
-                fillStyle: 'red',
+                fillStyle: 'gray',
                 anchor: 'center'
             }),
             options,
@@ -23,8 +21,8 @@ define(function (require) {
             }
         );
 
-        return fruit;
+        return robot;
     };
 
-    return Fruit;
+    return Robot;
 });
