@@ -41,11 +41,11 @@ define(function (require) {
 
         fruit.draw = function (stage) {
 
-        var pos = this.getPosition(),
-            rotate = this.body.getOption('rotate');
-        stage.addToStage(fruit.img, { x: pos.x, y: pos.y, rotate: rotate });
-        stage.addToStage(fruit.imgHighlight, { x: pos.x, y: pos.y });
-    };
+            var pos = this.getPosition(),
+                rotate = this.body.getOption('rotate');
+            stage.addToStage(fruit.img, { x: pos.x, y: pos.y, rotate: rotate });
+            stage.addToStage(fruit.imgHighlight, { x: pos.x, y: pos.y });
+        };
 
         return fruit;
     };
