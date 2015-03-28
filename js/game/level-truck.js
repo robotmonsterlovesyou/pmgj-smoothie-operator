@@ -19,6 +19,8 @@ define(function (require) {
 
     var truck = TruckEntity(world);
 
+    var startingTruckPlatformPos = truck.entities.platform.getOption('y');
+
     var bumpTick = truck.bump();
 
     var CATEGORY_ROBOT = 0x0001;  // 0000000000000001 in binary
@@ -142,7 +144,9 @@ define(function (require) {
         var shadowY = truck.entities.platform.getOption('y');
 
         game.stage.clear();
-        game.stage.addToStage(truck.entities.background);
+        game.stage.addToStage(truck.entities.background, {
+            y: -(startingTruckPlatformPos - shadowY)
+        });
 
         // game.stage.clear();
         fruits.map(function (fruit) {
