@@ -34,7 +34,7 @@ define(function (require) {
         robot.checkFruits = function(fruits) {
             robot.collidingFruits = [];
 
-            var robotLocation 
+            var robotLocation
 
             robotLocation = robot.getPosition()
 
@@ -66,21 +66,25 @@ define(function (require) {
             stage.addToStage(robot.img, { x: pos.x - 5, y: pos.y, rotate: rotate });
         };
 
+        // returns true if order was delivered
+        robot.deliverOrder = function(order) {
+
+            if (order.check(this.fruits)) {
+                // order matched and delivered
+                robot.score += this.fruits.length;
+                robot.fruits = [];
+                return true;
+            } else {
+                // order did not match
+                return false;
+            }
+        };
+
+        robot.watchFruits = function(fruits) {
+            console.log(fruits);
+        };
+
         return robot;
-    };
-
-    // returns true if order was delivered
-    Robot.prototype.deliverOrder = function(order) {
-
-        if (order.check(this.fruits)) {
-            // order matched and delivered
-            robot.score += fruits.length;
-            robot.fruits = [];
-            return true;
-        } else {
-            // order did not match
-            return false;
-        }
     };
 
     return Robot;

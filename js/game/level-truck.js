@@ -141,8 +141,11 @@ define(function (require) {
 
         world.Box2D('drawDebug');
 
+        var shadowY = truck.entities.platform.getOption('y') - truck.entities.platform.getOption('height') / 2;
         // game.stage.clear();
-        fruits.map(function (fruit) { fruit.draw(game.stage); });
+        fruits.map(function (fruit) {
+            fruit.draw(game.stage, shadowY);
+        });
         player1.draw(game.stage);
 
     });

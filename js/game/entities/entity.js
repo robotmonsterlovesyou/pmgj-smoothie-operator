@@ -75,24 +75,6 @@ define(function (require) {
         this.body.setOptions(this.fOptions);
     };
 
-    // WIP
-    Entity.prototype.setImage = function (facadeImage) {
-
-        this.body = new Facade.Image('images/' + imgFile + '.png');
-        this.body.setOptions(fOptions);
-        if (bOptions) {
-            this.body.Box2D('createObject', world, options);
-        } else {
-            this.body.Box2D('createObject', world, {
-                type: 'fixed',
-                rotate: true,
-                density: 1.0,
-                restitution: 1.0
-            });
-        }
-    };
-
-
     Entity.prototype.draw = function (stage) {
 
         stage.addToStage(this.body);

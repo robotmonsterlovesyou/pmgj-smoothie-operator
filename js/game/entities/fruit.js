@@ -33,19 +33,23 @@ define(function (require) {
                 restitution: 1.0
             }
         );
-    
+
         fruit.type = type;
         fruit.img = new Facade.Image( 'blender_images/' + fruitImgs[type], { anchor: 'center' });
         fruit.imgHighlight = new Facade.Image( 'blender_images/fruit_highlights.png', { anchor: 'center' });
+        fruit.imgShadow = new Facade.Image( 'blender_images/fruit_shadow.png', { anchor: 'center' });
 
-        fruit.draw = function (stage) {
+        fruit.draw = function (stage, shadowY) {
 
             var pos = this.getPosition(),
                 rotate = this.body.getOption('rotate');
+
+            stage.addToStage(fruit.imgShadow, { x: pos.x, y: shadowY, scale: 1 - (shadowY - pos.y) / shadowY });
             stage.addToStage(fruit.img, { x: pos.x, y: pos.y, rotate: rotate });
             if (this.type !== 'banana') {
                 stage.addToStage(fruit.imgHighlight, { x: pos.x, y: pos.y });
             }
+
         };
 
         return fruit;

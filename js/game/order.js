@@ -2,18 +2,23 @@
 
     'use strict';
 
-    function Order() {
+    function Order(number) {
 
-        this.orders = [];
+        this.fruits = [];
+
+        this.
     };
 
-    Order.prototype.check(fruits) {
+    Order.prototype.check = function (fruits) {
 
-
+        // if passed fruits are same as this.fruits, return true
     };
 
-    Order.prototype.draw() {
+    Order.prototype.draw = function (stage, maxOrders) {
 
+        // draw customer
+        // draw speech bubble
+        // draw fruits in bubble
     };
 
     return Order;
