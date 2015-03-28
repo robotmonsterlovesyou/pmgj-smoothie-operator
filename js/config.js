@@ -7,11 +7,14 @@ require.config({
         'facadejs-Box2D-plugin': '../bower_components/facadejs-Box2D-plugin/facadejs-Box2D',
         'gamepad': '../bower_components/gamepad.js/gamepad.min',
         'plastick': '../bower_components/plastick.js/plastick.min',
-        'tween': './lib/tweenjs-NEXT.combined.js'
+        'TWEEN': '../bower_components/tween.js/build/tween.min'
     },
     shim: {
         'box2dweb': {
             'exports': 'Box2D'
+        },
+        'TWEEN': {
+            'exports': 'TWEEN'
         }
     }
 });
