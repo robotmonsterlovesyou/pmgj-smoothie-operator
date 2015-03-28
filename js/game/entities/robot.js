@@ -21,7 +21,23 @@ define(function (require) {
             }
         );
 
+        robot.fruits = ['banana', 'blueberry'];
+
         return robot;
+    };
+
+    // returns true if order was delivered
+    Robot.prototype.deliverOrder(order) {
+
+        if (order.check(this.fruits)) {
+            // order matched and delivered
+            robot.score += fruits.length;
+            robot.fruits = [];
+            return true;
+        } else {
+            // order did not match
+            return false;
+        }
     };
 
     return Robot;
