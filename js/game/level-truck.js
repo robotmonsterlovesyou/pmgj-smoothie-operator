@@ -9,6 +9,7 @@ define(function (require) {
 
     var FruitEntity = require('./entities/fruit');
     var TruckEntity = require('./entities/truck');
+    var RobotEntity = require('./entities/robot');
 
     var state = new Plastick.State('level');
 
@@ -20,6 +21,33 @@ define(function (require) {
 
     var bumpTick = truck.bump();
 
+    var CATEGORY_ROBOT = 0x0001;  // 0000000000000001 in binary
+    var CATEGORY_FRUIT = 0x0002; // 0000000000000010 in binary
+    var CATEGORY_WALLS = 0x0004; // 0000000000000100 in binary
+    var CATEGORY_STUBS = 0x0008; // 0000000000000100 in binary
+    var MASK_ROBOT = CATEGORY_WALLS | CATEGORY_ROBOT; // or ~CATEGORY_PLAYER
+    var MASK_FRUIT = CATEGORY_WALLS | CATEGORY_FRUIT; // or ~CATEGORY_MONSTER
+    var MASK_WALLS = CATEGORY_ROBOT | CATEGORY_FRUIT | CATEGORY_WALLS;
+    var MASK_STUBS = CATEGORY_WALLS;
+
+    function addWallFiltering(wall) {
+        wall._box2d.entity.GetFixtureList().m_filter.categoryBits = CATEGORY_WALLS
+        wall._box2d.entity.GetFixtureList().m_filter.maskBits = MASK_WALLS
+    }
+
+    function addStubFiltering(wall) {
+        wall._box2d.entity.GetFixtureList().m_filter.categoryBits = CATEGORY_WALLS
+        wall._box2d.entity.GetFixtureList().m_filter.maskBits = MASK_WALLS
+    }
+
+    addWallFiltering(truck.entities.ceiling)
+    addWallFiltering(truck.entities.floor)
+    addWallFiltering(truck.entities.wallLeft)
+    addWallFiltering(truck.entities.wallRight)
+    addWallFiltering(truck.entities.platform)
+    addStubFiltering(truck.entities.platformBufferLeft)
+    addStubFiltering(truck.entities.platformBufferRight)
+    
     var fruits = [];
 
     fruits.push(FruitEntity(world, 'apple', { x: 200, y: 130 }));
@@ -29,6 +57,15 @@ define(function (require) {
     fruits.push(FruitEntity(world, 'strawberry', { x: 600, y: 80 }));
     fruits.push(FruitEntity(world, 'blueberry', { x: 700, y: 100 }));
     fruits.push(FruitEntity(world, 'apple', { x: 800, y: 100 }));
+
+    fruits.forEach(function(fruit) {
+        fruit.body._box2d.entity.GetFixtureList().m_filter.categoryBits = CATEGORY_FRUIT
+        fruit.body._box2d.entity.GetFixtureList().m_filter.maskBits = MASK_FRUIT
+    });
+
+    var player1 = new RobotEntity(world, {x: 500, y:100});
+    player1.body._box2d.entity.GetFixtureList().m_filter.categoryBits = CATEGORY_ROBOT
+    player1.body._box2d.entity.GetFixtureList().m_filter.maskBits = MASK_ROBOT
 
     state.update(function () {
 
@@ -60,6 +97,7 @@ define(function (require) {
 
         // game.stage.clear();
         fruits.map(function (fruit) { fruit.draw(game.stage); });
+        player1.draw(game.stage);
 
     });
 
