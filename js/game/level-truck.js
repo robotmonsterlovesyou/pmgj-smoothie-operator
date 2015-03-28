@@ -17,7 +17,7 @@ define(function (require) {
 
     var world = new Facade.Entity().Box2D('createWorld', { canvas: game.stage.canvas, gravity: [ 0, 30 ] });
 
-    var truck = TruckEntity(world, { x: 62, y: 62 });
+    var truck = TruckEntity(world);
 
     var bumpTick = truck.bump();
 
@@ -115,8 +115,6 @@ define(function (require) {
 
                 } else if (e.type === 'hold' && e.button === 'stick_axis_left') {
 
-                    console.log('test');
-
                     if (e.value[0] < -0.5) {
 
                         player1.setVelocity(-10, null);
@@ -142,6 +140,9 @@ define(function (require) {
         world.Box2D('drawDebug');
 
         var shadowY = truck.entities.platform.getOption('y');
+
+        game.stage.clear();
+        game.stage.addToStage(truck.entities.background);
 
         // game.stage.clear();
         fruits.map(function (fruit) {

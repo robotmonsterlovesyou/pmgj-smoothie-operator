@@ -3,15 +3,19 @@ define(function (require) {
     var Facade = require('facade'),
         Entity = require('./entity');
 
+    var game = require('../game');
+
     function Truck (world, options) {
 
-        var ceiling = new Facade.Rect({ x: 0, y: 0, width: 900, height: 25 });
-        var floor = new Facade.Rect({ x: 0, y: 425, width: 900, height: 25 });
-        var wallLeft = new Facade.Rect({ x: 0, y: 0, width: 25, height: 450 });
-        var wallRight = new Facade.Rect({ x: 875, y: 0, width: 25, height: 450 });
-        var platform = new Facade.Rect({ x: 30, y: 375, width: 840, height: 50 });
-        var platformBufferLeft = new Facade.Rect({ x: 0, y: 325, width: 50, height: 25 });
-        var platformBufferRight = new Facade.Rect({ x: 850, y: 325, width: 50, height: 25 });
+        var background = new Facade.Image('./blender_images/truck_interior.png');
+
+        var ceiling = new Facade.Rect({ x: 0, y: -25, width: game.stage.width(), height: 25 });
+        var floor = new Facade.Rect({ x: 0, y: game.stage.height(), width: game.stage.width(), height: 25 });
+        var wallLeft = new Facade.Rect({ x: -25, y: 0, width: 25, height: game.stage.height() });
+        var wallRight = new Facade.Rect({ x: game.stage.width(), y: 0, width: 25, height: game.stage.height() });
+        var platform = new Facade.Rect({ x: 5, y: game.stage.height() - 50, width: game.stage.width() - 10, height: 50 });
+        var platformBufferLeft = new Facade.Rect({ x: -25, y: game.stage.height() - 100, width: 50, height: 25 });
+        var platformBufferRight = new Facade.Rect({ x: game.stage.width() - 25, y: game.stage.height() - 100, width: 50, height: 25 });
 
         function position (x, y) {
 
@@ -28,7 +32,11 @@ define(function (require) {
 
         }
 
-        position(options.x, options.y);
+        if (options) {
+
+            position(options.x, options.y);
+
+        }
 
         ceiling.Box2D('createObject', world, { type: 'fixed' });
         floor.Box2D('createObject', world, { type: 'fixed' });
@@ -46,7 +54,8 @@ define(function (require) {
                 'wallRight': wallRight,
                 'platform': platform,
                 'platformBufferLeft': platformBufferLeft,
-                'platformBufferRight': platformBufferRight
+                'platformBufferRight': platformBufferRight,
+                'background': background
             },
             position: position,
             bump: function () {
