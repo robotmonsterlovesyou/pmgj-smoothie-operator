@@ -33,6 +33,8 @@ define(function (require) {
             restitution: 1.0
         };
 
+        this.fObject._parent = this;
+
         this.reset();
     };
 
