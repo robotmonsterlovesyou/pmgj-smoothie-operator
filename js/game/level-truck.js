@@ -50,6 +50,7 @@ define(function (require) {
     addStubFiltering(truck.entities.platformBufferLeft)
     addStubFiltering(truck.entities.platformBufferRight)
 
+    var fruitTypes = ['apple', 'orange', 'banana', 'strawberry', 'blueberry'];
     var fruits = [];
 
     fruits.push(FruitEntity(world, 'apple', { x: 200, y: 130 }));
@@ -74,6 +75,7 @@ define(function (require) {
         var e;
 
         player1.checkFruits(fruits);
+        player1.update();
 
         if (!(game.currentTick % bumpTick)) {
 
@@ -101,7 +103,7 @@ define(function (require) {
 
                 if (e.type === 'press' && e.button === 'button_1') {
 
-                    player1.setVelocity(null, -15);
+                    player1.jump();
 
                 } else if (e.type === 'press' && e.button === 'button_3') {
 
@@ -110,10 +112,12 @@ define(function (require) {
                 } else if (e.type === 'hold' && e.button === 'd_pad_left') {
 
                     player1.setVelocity(-10, null);
+                    player1.turnLeft()
 
                 } else if (e.type === 'hold' && e.button === 'd_pad_right') {
 
                     player1.setVelocity(10, null);
+                    player1.turnRight()
 
                 } else if (e.type === 'hold' && e.button === 'stick_axis_left') {
 
