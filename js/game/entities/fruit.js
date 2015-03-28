@@ -7,13 +7,15 @@ define(function (require) {
 
     function Fruit(world, options) {
 
+        var circle = Facade.Circle({
+            radius: 30,
+            fillStyle: 'red',
+            anchor: 'center'
+        })
+
         var fruit = new Entity(
             world,
-            Facade.Circle({
-                radius: 30,
-                fillStyle: 'red',
-                anchor: 'center'
-            }),
+            circle,
             options,
             {
                 type: 'dynamic',
@@ -22,6 +24,9 @@ define(function (require) {
                 restitution: 1.0
             }
         );
+
+        circle.parent = fruit
+        fruit.objectType = "fruit"
 
         return fruit;
     };

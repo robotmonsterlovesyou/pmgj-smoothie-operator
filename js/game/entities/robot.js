@@ -16,8 +16,8 @@ define(function (require) {
             {
                 type: 'dynamic',
                 rotate: true,
-                density: 1.0,
-                restitution: 1.0
+                density: 5.0,
+                restitution: 0.75
             }
         );
 
