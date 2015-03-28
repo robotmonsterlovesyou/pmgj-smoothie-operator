@@ -14,9 +14,10 @@ define(function (require) {
     function Entity(world, fObject, fOptions, bOptions) {
 
         this.id = nextId;
+        nextId += 1;
+
         this.fOptions = fOptions;
         this.bOptions = bOptions;
-        nextId += 1;
 
         if (fObject) {
             this.body = fObject;
@@ -70,7 +71,6 @@ define(function (require) {
 
         this.fOptions = options;
         this.body.setOptions(this.fOptions);
-console.log(this.body);
     };
 
     // WIP
@@ -90,17 +90,9 @@ console.log(this.body);
         }
     };
 
-    // WIP
-    Entity.prototype.isWithinViewport = function (stage, viewport) {
-
-        //return (viewport.position.x <= this.position.x + this.&& viewport.position.x ;
-        return true;
-    };
-
-    Entity.prototype.draw = function (stage, viewport) {
+    Entity.prototype.draw = function (stage) {
 
         stage.addToStage(this.body);
-        console.log('draw');
     };
 
     return Entity;

@@ -7,7 +7,9 @@ define(function (require) {
 
     function Fruit(world, options) {
 
-        var fruit = new Entity(world, Facade.Circle({
+        var fruit = new Entity(
+            world,
+            Facade.Circle({
                 radius: 15,
                 fillStyle: 'red',
                 anchor: 'center'

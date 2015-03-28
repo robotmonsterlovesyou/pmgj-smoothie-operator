@@ -31,7 +31,6 @@ define(function (require) {
     state.update(function () {
 
         // world.Box2D('step');
-
     });
 
     state.draw(function () {
@@ -40,9 +39,9 @@ define(function (require) {
 
         game.stage.clear();
         game.stage.addToStage(platform);
-        for (var fruit = 0; fruit < fruit.length; fruit += 1) fruit.draw(game.stage);
+        for (var fruit = 0; fruit < fruits.length; fruit += 1) fruits[fruit].draw(game.stage);
 
-        world.Box2D('drawDebug');
+        //world.Box2D('drawDebug');
 
     });
 
