@@ -1,4 +1,6 @@
-# Smoothies on the Go
+# Smoothie Operator
+
+![](blender_images/hero.png)
 
 ## Server
 
