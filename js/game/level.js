@@ -49,17 +49,8 @@ define(function (require) {
     player1.body._box2d.entity.GetFixtureList().m_filter.categoryBits = CATEGORY_ROBOT
     player1.body._box2d.entity.GetFixtureList().m_filter.maskBits = MASK_ROBOT
 
-    console.log(fruits[0].objectType)
     player1.body.Box2D('setCallback', 'PreSolve', function (self, other) {
 
-        console.log(self.parent)
-        if (other.type == "fruit") {
-            console.log("beep")
-        }
-
-        if (self.type =="fruit") {
-            console.log("beep2")
-        }
         // if (a && a.Box2D) {
         //     console.log("beep")
         // }
