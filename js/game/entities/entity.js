@@ -47,23 +47,23 @@ define(function (require) {
     // returns { x, y }
     Entity.prototype.getPosition = function () {
 
-        return this.Box2D('getPosition');
+        return this.body.Box2D('getPosition');
     };
 
     // returns { x, y }
     Entity.prototype.getVelocity = function () {
 
-        return this.Box2D('getVelocity');
+        return this.body.Box2D('getVelocity');
     };
 
     Entity.prototype.setPosition = function (x, y) {
 
-        return this.Box2D('setPosition', x, y);
+        return this.body.Box2D('setPosition', x, y);
     };
 
     Entity.prototype.setVelocity = function (x, y) {
 
-        return this.Box2D('setVelocity', x, y);
+        return this.body.Box2D('setVelocity', x, y);
     };
 
     // set Facade object options
