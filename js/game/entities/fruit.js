@@ -21,7 +21,7 @@ define(function (require) {
         options = options || {};
 
         var body = new Facade.Circle({
-            radius: 20,
+            radius: 27,
             anchor: 'center',
             fillStyle: 'rgba(0, 0, 0, 0)'
         });
@@ -43,15 +43,15 @@ define(function (require) {
             var pos = this.getPosition(),
                 rotate = this.body.getOption('rotate');
             stage.addToStage(fruit.img, { x: pos.x, y: pos.y, rotate: rotate });
-            stage.addToStage(fruit.imgHighlight, { x: pos.x, y: pos.y });
+            if (this.type !== 'banana') {
+                stage.addToStage(fruit.imgHighlight, { x: pos.x, y: pos.y, rotate: rotate });
+            }
         };
 
         console.log(fruit.body._parent)
         
         return fruit;
     };
-
-
 
     return Fruit;
 });

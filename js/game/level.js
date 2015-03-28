@@ -35,11 +35,13 @@ define(function (require) {
 
     var fruits = [];
 
+    var fruitTypes = ['apple', 'orange', 'banana', 'strawberry', 'blueberry'];
+
     for ( var i = 0; i < 5; i += 1) {
-        var fruit = new FruitEntity(world, 'apple', {
+        var fruit = new FruitEntity(world, fruitTypes[i % fruitTypes.length], {
             x: 500 + (i + 1),
             y: Math.random() * 100
-        })
+        });
 
         fruits.push(fruit);
 
