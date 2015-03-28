@@ -20,6 +20,14 @@ body {
     justify-content: center;
 }
 
-canvas {
-    background-color: #eee;
+.stage {
+    width: 1024px;
+    height: 568px;
+    background-image: url('../blender_images/clouds.png');
+    -webkit-animation: moveclouds 0.5s linear infinite;
+}
+
+@-webkit-keyframes moveclouds {
+    0% { background-position: 0 0; }
+    100% { background-position: -1024px 0; }
 }

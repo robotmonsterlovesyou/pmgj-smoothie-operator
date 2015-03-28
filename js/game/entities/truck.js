@@ -8,6 +8,7 @@ define(function (require) {
     function Truck (world, options) {
 
         var background = new Facade.Image('./blender_images/truck_interior.png');
+        var clouds = new Facade.Image('./blender_images/truck_clouds.png');
 
         var ceiling = new Facade.Rect({ x: 0, y: -25, width: game.stage.width(), height: 25 });
         var floor = new Facade.Rect({ x: 0, y: game.stage.height(), width: game.stage.width(), height: 25 });
@@ -55,7 +56,8 @@ define(function (require) {
                 'platform': platform,
                 'platformBufferLeft': platformBufferLeft,
                 'platformBufferRight': platformBufferRight,
-                'background': background
+                'background': background,
+                'clouds': clouds
             },
             position: position,
             bump: function () {

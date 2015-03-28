@@ -144,6 +144,7 @@ define(function (require) {
         var shadowY = truck.entities.platform.getOption('y');
 
         game.stage.clear();
+
         game.stage.addToStage(truck.entities.background, {
             y: -(startingTruckPlatformPos - shadowY)
         });
