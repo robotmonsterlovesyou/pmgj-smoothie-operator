@@ -44,12 +44,12 @@ define(function (require) {
                 rotate = this.body.getOption('rotate');
             stage.addToStage(fruit.img, { x: pos.x, y: pos.y, rotate: rotate });
             if (this.type !== 'banana') {
-                stage.addToStage(fruit.imgHighlight, { x: pos.x, y: pos.y, rotate: rotate });
+                stage.addToStage(fruit.imgHighlight, { x: pos.x, y: pos.y });
             }
         };
 
         console.log(fruit.body._parent)
-        
+
         return fruit;
     };
 
