@@ -20,11 +20,15 @@ define(function (require) {
 
     var bumpTick = truck.bump();
 
-    var fruit = FruitEntity(world, { x: 200, y: 130 });
-    var fruit = FruitEntity(world, { x: 300, y: 100 });
-    var fruit = FruitEntity(world, { x: 400, y: 120 });
-    var fruit = FruitEntity(world, { x: 500, y: 80 });
-    var fruit = FruitEntity(world, { x: 600, y: 80 });
+    var fruits = [];
+
+    fruits.push(FruitEntity(world, 'apple', { x: 200, y: 130 }));
+    fruits.push(FruitEntity(world, 'apple', { x: 300, y: 100 }));
+    fruits.push(FruitEntity(world, 'apple', { x: 400, y: 120 }));
+    fruits.push(FruitEntity(world, 'apple', { x: 500, y: 80 }));
+    fruits.push(FruitEntity(world, 'apple', { x: 600, y: 80 }));
+    fruits.push(FruitEntity(world, 'apple', { x: 700, y: 100 }));
+    fruits.push(FruitEntity(world, 'apple', { x: 800, y: 100 }));
 
     state.update(function () {
 
@@ -34,16 +38,28 @@ define(function (require) {
 
         }
 
+        if (!(game.currentTick % 100)) {
+
+            var velocity = Math.floor(Math.random() * 2) === 1 ? 1 : -1;
+
+            fruits.forEach(function (fruit) {
+
+                fruit.setVelocity(fruit.getVelocity().x + velocity, fruit.getVelocity().y);
+
+            });
+
+        }
+
     });
 
     state.draw(function () {
 
         world.Box2D('step');
 
-        game.stage.clear();
-        game.stage.addToStage(truck.entities);
-
         world.Box2D('drawDebug');
+
+        // game.stage.clear();
+        fruits.map(function (fruit) { fruit.draw(game.stage); });
 
     });
 

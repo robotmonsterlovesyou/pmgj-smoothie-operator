@@ -9,7 +9,7 @@ define(function (require) {
         var floor = new Facade.Rect({ x: 0, y: 425, width: 900, height: 25 });
         var wallLeft = new Facade.Rect({ x: 0, y: 0, width: 25, height: 450 });
         var wallRight = new Facade.Rect({ x: 875, y: 0, width: 25, height: 450 });
-        var platform = new Facade.Rect({ x: 25, y: 375, width: 850, height: 50 });
+        var platform = new Facade.Rect({ x: 30, y: 375, width: 840, height: 50 });
         var platformBufferLeft = new Facade.Rect({ x: 0, y: 325, width: 50, height: 25 });
         var platformBufferRight = new Facade.Rect({ x: 850, y: 325, width: 50, height: 25 });
 
