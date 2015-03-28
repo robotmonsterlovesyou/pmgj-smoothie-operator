@@ -34,7 +34,7 @@ define(function (require) {
     var fruits = [];
 
     for ( var i = 0; i < 2; i += 1) {
-        var fruit = new FruitEntity(world, {
+        var fruit = new FruitEntity(world, 'apple', {
             x: 500 + (i + 1),
             y: Math.random() * 100
         })
