@@ -51,7 +51,14 @@ define(function (require) {
     player1.body._box2d.entity.GetFixtureList().m_filter.categoryBits = CATEGORY_ROBOT
     player1.body._box2d.entity.GetFixtureList().m_filter.maskBits = MASK_ROBOT
 
-    var done = false
+    // player1.body.Box2D('setCallback', 'PreSolve', function (self, other) {
+
+    //     // if (a && a.Box2D) {
+    //     //     console.log("beep")
+    //     // }
+
+    // });
+
     state.update(function () {
         // player1.watchFruits(fruits);
     });
