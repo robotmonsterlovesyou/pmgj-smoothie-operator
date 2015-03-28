@@ -5,10 +5,10 @@ define(function (require) {
 
     require('facadejs-Box2D-plugin');
 
-    function Fruit(world, options) {
+    function Fruit(world, type, options) {
 
         var circle = Facade.Circle({
-            radius: 30,
+            radius: 20,
             fillStyle: 'red',
             anchor: 'center'
         })
@@ -25,9 +25,12 @@ define(function (require) {
             }
         );
 
-        circle.parent = fruit
+
+        fruit.body._parent = fruit
         fruit.objectType = "fruit"
 
+        console.log(fruit.body._parent)
+        
         return fruit;
     };
 

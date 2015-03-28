@@ -31,9 +31,11 @@ define(function (require) {
     platform._box2d.entity.GetFixtureList().m_filter.categoryBits = CATEGORY_WALLS
     platform._box2d.entity.GetFixtureList().m_filter.maskBits = MASK_WALLS
 
+    platform.parent = "hey"
+
     var fruits = [];
 
-    for ( var i = 0; i < 2; i += 1) {
+    for ( var i = 0; i < 5; i += 1) {
         var fruit = new FruitEntity(world, 'apple', {
             x: 500 + (i + 1),
             y: Math.random() * 100
@@ -49,29 +51,9 @@ define(function (require) {
     player1.body._box2d.entity.GetFixtureList().m_filter.categoryBits = CATEGORY_ROBOT
     player1.body._box2d.entity.GetFixtureList().m_filter.maskBits = MASK_ROBOT
 
-    console.log(fruits[0].objectType)
-    player1.body.Box2D('setCallback', 'PreSolve', function (self, other) {
-
-        console.log(self.parent)
-        if (other.type == "fruit") {
-            console.log("beep")
-        }
-
-        if (self.type =="fruit") {
-            console.log("beep2")
-        }
-        // if (a && a.Box2D) {
-        //     console.log("beep")
-        // }
-
-    });
-
-    player1.body
-
-
+    var done = false
     state.update(function () {
-
-        // world.Box2D('step');
+        // player1.watchFruits(fruits);
     });
 
     state.draw(function () {
@@ -82,7 +64,7 @@ define(function (require) {
         game.stage.addToStage(platform);
         for (var fruit = 0; fruit < fruits.length; fruit += 1) fruits[fruit].draw(game.stage);
 
-            player1.draw(game.stage);
+        player1.draw(game.stage);
         //world.Box2D('drawDebug');
 
     });

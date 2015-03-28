@@ -23,6 +23,7 @@ define(function (require) {
 
         robot.fruits = ['banana', 'blueberry'];
 
+
         return robot;
     };
 
@@ -38,6 +39,10 @@ define(function (require) {
             // order did not match
             return false;
         }
+    };
+
+    Robot.prototype.watchFruits = function(fruits) {
+        console.log(fruits);
     };
 
     return Robot;
