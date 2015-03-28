@@ -1,0 +1,13 @@
+{
+  "name": "plastick.js",
+  "homepage": "https://github.com/syntaxtsb/plastick.js",
+  "_release": "0e12bea79a",
+  "_resolution": {
+    "type": "branch",
+    "branch": "0.4.0",
+    "commit": "0e12bea79ae3a2deb8a2e6c1e53b43fef03cc5e9"
+  },
+  "_source": "git://github.com/syntaxtsb/plastick.js.git",
+  "_target": "0.4.0",
+  "_originalSource": "syntaxtsb/plastick.js"
+}

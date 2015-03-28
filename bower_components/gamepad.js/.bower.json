@@ -1,0 +1,38 @@
+{
+  "name": "gamepad.js",
+  "description": "Simple customizable event binding for the HTML Gamepad API.",
+  "main": "gamepad.js",
+  "license": "MIT",
+  "ignore": [
+    ".gitignore",
+    ".jslintrc",
+    "Gruntfile.js",
+    "*.json"
+  ],
+  "keywords": [
+    "gamepad",
+    "controller"
+  ],
+  "authors": [
+    {
+      "name": "Scott Doxey",
+      "email": "hello@scottdoxey.com",
+      "homepage": "http://scottdoxey.com/"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/neogeek/gamepad.js.git"
+  },
+  "private": true,
+  "homepage": "https://github.com/neogeek/gamepad.js",
+  "_release": "655675863b",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "655675863bf258fa459cb1ef2a06e7e5f9fdb13e"
+  },
+  "_source": "git://github.com/neogeek/gamepad.js.git",
+  "_target": "*",
+  "_originalSource": "neogeek/gamepad.js"
+}
