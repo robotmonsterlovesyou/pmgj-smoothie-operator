@@ -1,21 +1,34 @@
 define(function (require) {
 
+    'use strict';
+
     var Facade = require('facade'),
         Entity = require('./entity');
 
     require('facadejs-Box2D-plugin');
 
-    function Fruit(world, options) {
+    var fruitImgs = {
+        apple: 'apple.png',
+        banana: 'banana.png',
+        orange: 'orange.png',
+        strawberry: 'strawberry.png',
+        blueberry: 'blueberry.png'
+    };
 
-        var fruit = new Entity(
-            world,
-            Facade.Circle({
+    function Fruit(world, type, options) {
+
+        this.type = type;
+
+        var f = new Facade.Circle({
                 radius: 30,
                 fillStyle: 'red',
                 anchor: 'center'
-            }),
-            options,
-            {
+            });
+        if (this.type) f = new Facade.Image({
+                image: fruitImgs[this.type],
+                anchor: 'center'
+            });
+        var fruit = new Entity(world, f, options, {
                 type: 'dynamic',
                 rotate: true,
                 density: 1.0,
