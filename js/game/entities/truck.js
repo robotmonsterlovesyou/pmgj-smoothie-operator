@@ -39,7 +39,15 @@ define(function (require) {
         platformBufferRight.Box2D('createObject', world, { type: 'fixed' });
 
         return {
-            entities: [],
+            entities: {
+                'ceiling': ceiling,
+                'floor': floor,
+                'wallLeft': wallLeft,
+                'wallRight': wallRight,
+                'platform': platform,
+                'platformBufferLeft': platformBufferLeft,
+                'platformBufferRight': platformBufferRight
+            },
             position: position,
             bump: function () {
 
