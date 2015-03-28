@@ -27,7 +27,7 @@ define(function (require) {
     };
 
     // returns true if order was delivered
-    Robot.prototype.deliverOrder(order) {
+    Robot.prototype.deliverOrder = function(order) {
 
         if (order.check(this.fruits)) {
             // order matched and delivered
