@@ -39,14 +39,18 @@ define(function (require) {
         platformBufferRight.Box2D('createObject', world, { type: 'fixed' });
 
         return {
-            entities: [ceiling, floor, wallLeft, wallRight],
+            entities: [],
             position: position,
             bump: function () {
 
+                var nextTick = Math.floor(Math.random() * 30) + 60;
+
                 platform._box2d.entity.ApplyImpulse(
-                    new Box2D.Common.Math.b2Vec2(0, -1000),
+                    new Box2D.Common.Math.b2Vec2(0, -500),
                     platform._box2d.entity.GetWorldCenter()
                 );
+
+                return nextTick;
 
             }
         };
