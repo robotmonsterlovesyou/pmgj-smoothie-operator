@@ -15,7 +15,7 @@ define(function (require) {
 
     var controller = require('./controller')(state);
 
-    var world = new Facade.Entity().Box2D('createWorld', { canvas: game.stage.canvas, gravity: [ 0, 20 ] });
+    var world = new Facade.Entity().Box2D('createWorld', { canvas: game.stage.canvas, gravity: [ 0, 30 ] });
 
     var truck = TruckEntity(world, { x: 62, y: 62 });
 
@@ -47,7 +47,7 @@ define(function (require) {
     addWallFiltering(truck.entities.platform)
     addStubFiltering(truck.entities.platformBufferLeft)
     addStubFiltering(truck.entities.platformBufferRight)
-    
+
     var fruits = [];
 
     fruits.push(FruitEntity(world, 'apple', { x: 200, y: 130 }));
@@ -68,8 +68,11 @@ define(function (require) {
     player1.body._box2d.entity.GetFixtureList().m_filter.maskBits = MASK_ROBOT
 
     state.update(function () {
+
+        var e;
+
         player1.checkFruits(fruits);
-        
+
         if (!(game.currentTick % bumpTick)) {
 
             bumpTick = truck.bump();
@@ -85,6 +88,48 @@ define(function (require) {
                 fruit.setVelocity(fruit.getVelocity().x + velocity, fruit.getVelocity().y);
 
             });
+
+        }
+
+        if (controller.queue.length) {
+
+             while (controller.queue.length) {
+
+                e = controller.queue.shift();
+
+                if (e.type === 'press' && e.button === 'button_1') {
+
+                    player1.setVelocity(null, -15);
+
+                } else if (e.type === 'press' && e.button === 'button_3') {
+
+                    alert('blend');
+
+                } else if (e.type === 'hold' && e.button === 'd_pad_left') {
+
+                    player1.setVelocity(-10, null);
+
+                } else if (e.type === 'hold' && e.button === 'd_pad_right') {
+
+                    player1.setVelocity(10, null);
+
+                } else if (e.type === 'hold' && e.button === 'stick_axis_left') {
+
+                    console.log('test');
+
+                    if (e.value[0] < -0.5) {
+
+                        player1.setVelocity(-10, null);
+
+                    } else if (e.value[0] > 0.5) {
+
+                        player1.setVelocity(10, null);
+
+                    }
+
+                }
+
+             }
 
         }
 
