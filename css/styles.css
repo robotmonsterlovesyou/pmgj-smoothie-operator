@@ -23,8 +23,9 @@ body {
 .stage {
     width: 1024px;
     height: 568px;
-    background-image: url('../blender_images/clouds.png');
-    -webkit-animation: moveclouds 0.5s linear infinite;
+    background-color: #C8B9DB;
+    /*background-image: url('../blender_images/clouds.png');*/
+    /*-webkit-animation: moveclouds 0.5s linear infinite;*/
 }
 
 @-webkit-keyframes moveclouds {
