@@ -44,7 +44,7 @@ define(function (require) {
             var pos = this.getPosition(),
                 rotate = this.body.getOption('rotate');
 
-            stage.addToStage(fruit.imgShadow, { x: pos.x, y: shadowY, scale: 1 - (shadowY - pos.y) / shadowY });
+            stage.addToStage(fruit.imgShadow, { x: pos.x, y: shadowY });
             stage.addToStage(fruit.img, { x: pos.x, y: pos.y, rotate: rotate });
             if (this.type !== 'banana') {
                 stage.addToStage(fruit.imgHighlight, { x: pos.x, y: pos.y });

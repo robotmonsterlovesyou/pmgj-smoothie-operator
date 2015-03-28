@@ -16,9 +16,9 @@
         }
     };
 
-    OrderManager.prototype.fulfillOrder = function () {
+    OrderManager.prototype._fulfillOrder = function (id) {
 
-
+        this.orders.splice();
     };
 
     OrderManager.prototype.checkOrders = function (fruits) {
