@@ -15,7 +15,6 @@ define(function (require) {
             options,
             {
                 type: 'dynamic',
-                rotate: true,
                 density: 5.0,
                 restitution: 0.0
             }
