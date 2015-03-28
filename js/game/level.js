@@ -17,19 +17,11 @@ define(function (require) {
         anchor: 'center'
     });
 
-    box.stats = {};
-
-    box.stats.prevX = box._options.x;
-    box.stats.prevY = box._options.y;
-
     var speed = 5;
 
     state.update(function () {
 
         var e;
-
-        box.stats.prevX = box._options.x;
-        box.stats.prevY = box._options.y;
 
         if (controller.queue.length) {
 
@@ -79,8 +71,6 @@ define(function (require) {
 
             }
 
-            controller.queue = [];
-
         }
 
     });
@@ -88,10 +78,7 @@ define(function (require) {
     state.draw(function () {
 
         game.stage.clear();
-        game.stage.addToStage(box, {
-            x: game.lerp(box.stats.prevX, box._options.x),
-            y: game.lerp(box.stats.prevY, box._options.y)
-        });
+        game.stage.addToStage(box);
 
     });
 
