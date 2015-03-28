@@ -7,8 +7,11 @@ define(function (require) {
 
     function Robot(world, options) {
 
+        var FRUIT_RADIUS = 27
+        var ROBOT_RADIUS = 50
+
         var robot = new Entity(world, Facade.Circle({
-                radius: 30,
+                radius: ROBOT_RADIUS,
                 fillStyle: 'gray',
                 anchor: 'center'
             }),
@@ -24,14 +27,34 @@ define(function (require) {
 
         robot.collidingFruits = []
 
+        robot.addCollidingFruit = function(fruit) {
+            robot.collidingFruits.push(fruit)
+        }
+
         robot.checkFruits = function(fruits) {
+            robot.collidingFruits = [];
 
-            // console.log("checking ", robot.getPosition());
-            // console.log("checking ", fruits[0].getPosition());
+            var robotLocation 
 
-            var checkFruitOverlay = function() {
+            robotLocation = robot.getPosition()
 
-            }
+            fruits.forEach(function(fruit) {
+                var fruitPosition = fruit.getPosition();
+
+                var xDist = robotLocation.x - fruitPosition.x
+                var yDist = robotLocation.y - fruitPosition.y
+
+                var totalDistance = Math.sqrt( xDist*xDist + yDist*yDist );
+
+                if (totalDistance < (FRUIT_RADIUS + ROBOT_RADIUS)) {
+                    robot.addCollidingFruit(fruit)
+                }
+            });
+        }
+
+        robot.blendFruit = function() {
+            robot.collidingFruits.forEach(function(fruit) {
+            });
         }
 
         robot.img = new Facade.Image( 'blender_images/blender_body.png', { anchor: 'center' });
@@ -40,7 +63,7 @@ define(function (require) {
 
             var pos = this.getPosition(),
                 rotate = this.body.getOption('rotate');
-            stage.addToStage(robot.img, { x: pos.x, y: pos.y, rotate: rotate });
+            stage.addToStage(robot.img, { x: pos.x - 5, y: pos.y, rotate: rotate });
         };
 
         return robot;
@@ -58,10 +81,6 @@ define(function (require) {
             // order did not match
             return false;
         }
-    };
-
-    Robot.prototype.watchFruits = function(fruits) {
-        console.log(fruits);
     };
 
     return Robot;

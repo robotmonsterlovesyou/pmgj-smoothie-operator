@@ -33,7 +33,7 @@ define(function (require) {
                 restitution: 1.0
             }
         );
-
+    
         fruit.type = type;
         fruit.img = new Facade.Image( 'blender_images/' + fruitImgs[type], { anchor: 'center' });
         fruit.imgHighlight = new Facade.Image( 'blender_images/fruit_highlights.png', { anchor: 'center' });
@@ -47,8 +47,6 @@ define(function (require) {
                 stage.addToStage(fruit.imgHighlight, { x: pos.x, y: pos.y });
             }
         };
-
-        console.log(fruit.body._parent)
 
         return fruit;
     };

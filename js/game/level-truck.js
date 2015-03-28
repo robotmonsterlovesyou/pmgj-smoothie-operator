@@ -68,7 +68,8 @@ define(function (require) {
     player1.body._box2d.entity.GetFixtureList().m_filter.maskBits = MASK_ROBOT
 
     state.update(function () {
-
+        player1.checkFruits(fruits);
+        
         if (!(game.currentTick % bumpTick)) {
 
             bumpTick = truck.bump();
