@@ -35,8 +35,6 @@ define(function (require) {
 
             }
 
-            controller.queue = [];
-
         }
 
     });
