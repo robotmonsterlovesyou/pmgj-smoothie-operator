@@ -6,7 +6,7 @@ define(function (require) {
 
     return function (world, options) {
 
-        var fruit = new Facade.Circle({ radius: 15, fillStyle: 'red' });
+        var fruit = new Facade.Circle({ radius: 15, fillStyle: 'red', anchor: 'center' });
 
         fruit.setOptions(options);
 

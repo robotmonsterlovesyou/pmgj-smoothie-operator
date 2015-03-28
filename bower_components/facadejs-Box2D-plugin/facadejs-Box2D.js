@@ -346,15 +346,6 @@
                     y: vector.y * this._box2d.config.scale
                 };
 
-                if (this instanceof Facade.Circle) {
-
-                    metrics = this.getAllMetrics();
-
-                    pos.x -= (metrics.width / 2);
-                    pos.y -= (metrics.height / 2);
-
-                }
-
                 return pos;
 
             }
