@@ -1,12 +1,15 @@
 define(function (require) {
 
     var Facade = require('facade'),
-        Entity = require('./entity');
+        Entity = require('./entity'),
+        Howl = require('howler').Howl;
 
     require('facadejs-Box2D-plugin');
 
     var ui = require('./ui');
     var splashes = require('./splashes');
+
+    var blendSFX = new Howl({ urls: ['../../sfx/blend_03.mp3']});
 
     function Robot(world, options) {
 
@@ -85,6 +88,7 @@ define(function (require) {
 
         robot.addFruit = function(fruitType) {
             if (robot.fruits.length < 3) {
+                blendSFX.play();
                 return robot.fruits.push(fruitType);
             }
             return false;

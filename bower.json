@@ -6,6 +6,7 @@
         "facade.js": "0.3.0-beta.7",
         "facadejs-Box2D-plugin": "neogeek/facadejs-Box2D-plugin",
         "gamepad.js": "neogeek/gamepad.js",
+        "howler.js": "1.1.25",
         "plastick.js": "syntaxtsb/plastick.js#0.4.0",
         "requirejs": "2.1.16",
         "tween.js": "git@github.com:sole/tween.js.git"

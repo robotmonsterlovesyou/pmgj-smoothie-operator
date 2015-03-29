@@ -6,6 +6,7 @@ require.config({
         'facade': '../bower_components/facade.js/facade',
         'facadejs-Box2D-plugin': '../bower_components/facadejs-Box2D-plugin/facadejs-Box2D',
         'gamepad': '../bower_components/gamepad.js/gamepad.min',
+        'howler': '../bower_components/howler.js/howler.min',
         'plastick': '../bower_components/plastick.js/plastick.min',
         'TWEEN': '../bower_components/tween.js/build/tween.min'
     },
