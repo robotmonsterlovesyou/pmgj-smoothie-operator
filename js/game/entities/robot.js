@@ -11,8 +11,16 @@ define(function (require) {
     var ui = require('./ui');
     var splashes = require('./splashes');
 
-    var blendSFX = new Howl({ urls: ['./sfx/blend_03.mp3'] });
-    var footstepSFX = new Howl({ urls: ['./sfx/blender_footstep_03.mp3'] });
+    var blendSFX = [
+        new Howl({ urls: ['./sfx/blend_01.mp3'] }),
+        new Howl({ urls: ['./sfx/blend_02.mp3'] }),
+        new Howl({ urls: ['./sfx/blend_03.mp3'] })
+    ];
+    var footstepSFX = [
+        new Howl({ urls: ['./sfx/blender_footstep_01.mp3'] }),
+        new Howl({ urls: ['./sfx/blender_footstep_02.mp3'] }),
+        new Howl({ urls: ['./sfx/blender_footstep_03.mp3'] })
+    ];
 
     function Robot(world, options) {
 
@@ -92,7 +100,7 @@ define(function (require) {
 
         robot.addFruit = function(fruitType) {
             if (robot.fruits.length < 3) {
-                blendSFX.play();
+                blendSFX[Math.round(Math.random() * (blendSFX.length -1))].play();
                 return robot.fruits.push(fruitType);
             }
             return false;
@@ -135,7 +143,7 @@ define(function (require) {
         robot.update = function() {
 
             if (robot.isWalking && !robot.jumping && !(game.currentTick % 13)) {
-                footstepSFX.play();
+                footstepSFX[Math.round(Math.random() * (footstepSFX.length -1))].play();
             }
 
             if (robot.isWalking) {
