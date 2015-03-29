@@ -11,7 +11,13 @@ define(function (require) {
 
     var controller = require('./controller')(state);
 
-    var background = new Facade.Image(ui.getPausedState(), { opacity: 0.5 });
+    var background = new Facade.Image(ui.getPausedState());
+
+    if (window.devicePixelRatio) {
+
+        background.setOptions({ scale: 0.5 });
+
+    }
 
     state.update(function () {
 
