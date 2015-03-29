@@ -26,6 +26,9 @@ define(function (require) {
         );
 
         robot.fruits = [];
+        robot.score = 0;
+
+        robot.scoreText = Facade.Text('Score: ' + robot.score, { x: 30, y: 520, anchor: 'top/left', fontFamily: "Monaco  ", fontSize: 30});
 
         robot.collidingFruits = []
 
@@ -292,6 +295,9 @@ define(function (require) {
             drawLeg(stage, leg1, pos.x - 40, pos.y + 50, 1, false, robot.jumpCount, walkCount, walkPhase, false)
             drawLeg(stage, leg2, pos.x - 25, pos.y + 55, 1, false, robot.jumpCount, walkCount, walkPhase, true)
             drawLeg(stage, leg1, pos.x - 10, pos.y + 60, 1, false, robot.jumpCount, walkCount, walkPhase, false)
+
+            robot.scoreText.setText('Score: ' + robot.score);
+            stage.addToStage(robot.scoreText);
         };
 
         // returns true if order was delivered

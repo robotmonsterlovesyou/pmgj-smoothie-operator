@@ -29,7 +29,7 @@ define(function (require) {
 
     OrderManager.prototype._fulfillOrder = function (id) {
 
-console.log('Order ' + id + ' fulfilled!');
+console.log('Order ' + id + ' fulfilled! ');
         delete this.orders[id];
     };
 
