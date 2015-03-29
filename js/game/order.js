@@ -19,7 +19,7 @@ define(function (require) {
 
         this.offsetX = (this.number * 260 + 110);
 
-        this.customer = new PersonEntity(0, { x: '+=' + this.offsetX });
+        this.customer = new PersonEntity(Math.floor(Math.random() * 3), { x: '+=' + this.offsetX });
 
         for (var i = 0; i < 3; i += 1) {
             this.fruits.push(new Fruit());

@@ -14,11 +14,18 @@ define(function (require) {
     OrderManager.prototype.createOrder = function () {
 
         var keys = Object.keys(this.orders),
-            available = [];
+            available = [0, 1, 2];
 
-        if (this.orders.length < this.orderMax) {
-            this.orders.push(new Order(1));
+        for (var key = 0; key < keys.length; key += 1) {
+            delete available[keys[key]];
         }
+
+        var availableKeys = Object.keys(available);
+        if (availableKeys.length > 0) {
+            var newKey = Math.floor(Math.random() * availableKeys.length);
+            this.orders[availableKeys[newKey]] = new Order(availableKeys[newKey]);
+        }
+        console.log(available, this.orders);
     };
 
     OrderManager.prototype._fulfillOrder = function (id) {
@@ -30,8 +37,8 @@ console.log('Order ' + id + ' fulfilled!');
     OrderManager.prototype.checkOrders = function (fruits) {
 
         var keys = Object.keys(this.orders);
-        for (var key = 0; key < this.orders.length; key += 1) {
-            if (order.check(fruits)) this._fulfillOrder(key);
+        for (var key = 0; key < keys.length; key += 1) {
+            if (order.check(fruits)) this._fulfillOrder(keys[key]);
         }
     };
 
@@ -46,8 +53,8 @@ console.log('Order ' + id + ' fulfilled!');
         var offset = { y: truckOffset },
             keys = Object.keys(this.orders);
 
-        for (var i = 0; i < keys.length; i += 1) {
-            this.orders[i].beforeTruckDraw(stage, offset);
+        for (var key = 0; key < keys.length; key += 1) {
+            this.orders[keys[key]].beforeTruckDraw(stage, offset);
         }
     };
 
@@ -56,8 +63,8 @@ console.log('Order ' + id + ' fulfilled!');
         var offset = { y: truckOffset },
             keys = Object.keys(this.orders);
 
-        for (var i = 0; i < keys.length; i += 1) {
-            this.orders[i].afterTruckDraw(stage, offset);
+        for (var key = 0; key < keys.length; key += 1) {
+            this.orders[keys[key]].afterTruckDraw(stage, offset);
         }
     };
 
