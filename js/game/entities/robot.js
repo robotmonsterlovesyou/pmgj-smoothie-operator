@@ -4,12 +4,15 @@ define(function (require) {
         Entity = require('./entity'),
         Howl = require('howler').Howl;
 
+    var game = require('../game');
+
     require('facadejs-Box2D-plugin');
 
     var ui = require('./ui');
     var splashes = require('./splashes');
 
-    var blendSFX = new Howl({ urls: ['../../sfx/blend_03.mp3']});
+    var blendSFX = new Howl({ urls: ['../../sfx/blend_03.mp3'] });
+    var footstepSFX = new Howl({ urls: ['../../sfx/blender_footstep_03.mp3'] });
 
     function Robot(world, options) {
 
@@ -129,6 +132,11 @@ define(function (require) {
         var JUMP_MAX = 10
 
         robot.update = function() {
+
+            if (robot.isWalking && !robot.jumping && !(game.currentTick % 13)) {
+                footstepSFX.play();
+            }
+
             if (robot.isWalking) {
                 if (robot.walkPhase == 0) {
                     robot.walkPhase = 1
