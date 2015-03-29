@@ -18,7 +18,7 @@ define(function (require) {
         },
         addSplash: function (position, fruits) {
 
-            splashes._objects = splashes._objects.slice(-24);
+            splashes._objects = splashes._objects.slice(-99);
 
             splashes.addToGroup(new Facade.Image(images[fruits[0]], { x: position, y: 520 + (Math.random() * 24 - 12), anchor: 'center' }));
 
