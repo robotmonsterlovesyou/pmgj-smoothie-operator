@@ -82,6 +82,12 @@ define(function (require) {
 
     var orders = new OrderManager();
 
+    state.init(function (game) {
+
+        game.data.pauseTime = 0;
+        controller.resume();
+    });
+
     state.update(function (game) {
 
         var e;
