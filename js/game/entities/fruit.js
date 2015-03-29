@@ -15,9 +15,15 @@ define(function (require) {
         blueberry: 'fruit_5.png'
     };
 
+    function randomFruitType() {
+
+        var keys = Object.keys(fruitImgs);
+        return keys[Math.floor(Math.random() * keys.length)];
+    };
+
     function Fruit(world, type, options) {
 
-        type = type || 'apple';
+        if (type in fruitImgs === false) type = randomFruitType();
         options = options || {};
 
         var body = new Facade.Circle({
@@ -26,13 +32,17 @@ define(function (require) {
             fillStyle: 'rgba(0, 0, 0, 0)'
         });
 
-        var fruit = new Entity(world, body, options, {
+        var fruit;
+        if (world) {
+            fruit = new Entity(world, body, options, {
                 type: 'dynamic',
                 rotate: true,
                 density: 1.0,
                 restitution: 1.0
-            }
-        );
+            });
+        } else {
+            fruit = {};
+        }
 
         fruit.type = type;
         fruit.img = new Facade.Image('blender_images/' + fruitImgs[type], { anchor: 'center' });
@@ -42,7 +52,7 @@ define(function (require) {
         fruit.draw = function (stage, shadowY) {
 
             var pos = this.getPosition(),
-                rotate = this.body.getOption('rotate');
+                rotate = this.body.getOption('rotate') || 0;
 
             stage.addToStage(fruit.imgShadow, { x: pos.x, y: shadowY, scale: 1 - (shadowY - pos.y) / shadowY * 0.7 });
             stage.addToStage(fruit.img, { x: pos.x, y: pos.y, rotate: rotate });
