@@ -12,14 +12,14 @@ define(function (require) {
     var splashes = require('./splashes');
 
     var blendSFX = [
-        new Howl({ urls: ['./sfx/blend_01.mp3'] }),
-        new Howl({ urls: ['./sfx/blend_02.mp3'] }),
-        new Howl({ urls: ['./sfx/blend_03.mp3'] })
+        new Howl({ urls: ['./sfx/blend_01.mp3'], volume: 0.5 }),
+        new Howl({ urls: ['./sfx/blend_02.mp3'], volume: 0.5 }),
+        new Howl({ urls: ['./sfx/blend_03.mp3'], volume: 0.5 })
     ];
     var footstepSFX = [
-        new Howl({ urls: ['./sfx/blender_footstep_01.mp3'] }),
-        new Howl({ urls: ['./sfx/blender_footstep_02.mp3'] }),
-        new Howl({ urls: ['./sfx/blender_footstep_03.mp3'] })
+        new Howl({ urls: ['./sfx/blender_footstep_01.mp3'], volume: 0.25 }),
+        new Howl({ urls: ['./sfx/blender_footstep_02.mp3'], volume: 0.25 }),
+        new Howl({ urls: ['./sfx/blender_footstep_03.mp3'], volume: 0.25 })
     ];
 
     function Robot(world, options) {

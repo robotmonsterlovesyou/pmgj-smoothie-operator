@@ -2,8 +2,16 @@ define(function (require) {
 
     'use strict';
 
+    var Howl = require('howler').Howl;
+
     var Order = require('./order');
     var ui = require('./entities/ui');
+
+    var slurpSFX = [
+        new Howl({ urls: ['./sfx/slurp_01.mp3'], volume: 1 }),
+        new Howl({ urls: ['./sfx/slurp_02.mp3'], volume: 1 }),
+        new Howl({ urls: ['./sfx/slurp_03.mp3'], volume: 1 })
+    ];
 
     function OrderManager() {
 
@@ -30,12 +38,15 @@ define(function (require) {
 
     OrderManager.prototype._fulfillOrder = function (id) {
 
-        var points = this.orders[id].getPointValue();
+        var self = this,
+            points = self.orders[id].getPointValue();
 console.log('Order ' + id + ' fulfilled! ' + points + ' points');
-        this.orders[id].customer.satisfied = true;
-        setTimeout((function () {
-            delete this.orders[id];
-        }).bind(this), 1500);
+        self.orders[id].customer.satisfied = true;
+        setTimeout(function () {
+            slurpSFX[Math.round(Math.random() * (slurpSFX.length -1))].play().on('end', function () {
+                delete self.orders[id];
+            });
+        }, 500);
         return points;
     };
 
