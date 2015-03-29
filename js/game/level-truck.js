@@ -171,6 +171,8 @@ define(function (require) {
 
         game.stage.clear();
 
+        game.stage.addToStage(truck.entities.clouds);
+
         orders.beforeTruckDraw(game.stage, platformY - startingTruckPlatformPos);
 
         game.stage.addToStage(truck.entities.background, {
