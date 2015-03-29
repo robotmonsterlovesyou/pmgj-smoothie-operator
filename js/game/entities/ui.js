@@ -32,6 +32,14 @@ define(function (require) {
 
     group.addToGroup(time);
 
+    var livesGroup = new Facade.Group({ x: 10, y: 10 });
+
+    group.addToGroup(livesGroup);
+
+    var blenderLife = new Facade.Image('./blender_images/lives.png', { height: 53, frames: [0, 1, 2, 3] });
+
+    livesGroup.addToGroup(blenderLife);
+
     return {
         entities: {
             group: group,
@@ -46,6 +54,15 @@ define(function (require) {
         getPausedState: function () {
 
             return pausedBackground;
+
+        },
+        setLivesUsed: function (used) {
+
+            if (used <= 3) {
+
+                blenderLife.currentFrame = used;
+
+            }
 
         }
     };
