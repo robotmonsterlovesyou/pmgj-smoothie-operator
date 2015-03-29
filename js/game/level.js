@@ -35,7 +35,7 @@ define(function (require) {
     var CATEGORY_WALLS = 0x0004; // 0000000000000100 in binary
     var CATEGORY_STUBS = 0x0008; // 0000000000001000 in binary
     var MASK_ROBOT = CATEGORY_WALLS | CATEGORY_ROBOT;
-    var MASK_FRUIT = CATEGORY_WALLS | CATEGORY_FRUIT; 
+    var MASK_FRUIT = CATEGORY_WALLS | CATEGORY_FRUIT;
     var MASK_WALLS = CATEGORY_ROBOT | CATEGORY_FRUIT | CATEGORY_WALLS | CATEGORY_STUBS;
     var MASK_STUBS = CATEGORY_WALLS | CATEGORY_STUBS;
 
@@ -89,7 +89,7 @@ define(function (require) {
         ui.entities.time.setText(ui.entities.time.value.replace(/[0-9]+/, Math.round(game.gameTime() / 1000)));
 
         truck.entities.clouds.forEach(function (cloud) {
-            cloud.setOptions({ x: '-=20' });
+            // cloud.setOptions({ x: '-=5' });
             if (cloud.getOption('x') < -game.stage.width()) {
                 cloud.setOptions({ x: game.stage.width() });
             }
