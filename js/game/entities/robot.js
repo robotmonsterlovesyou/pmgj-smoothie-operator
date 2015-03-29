@@ -11,8 +11,8 @@ define(function (require) {
     var ui = require('./ui');
     var splashes = require('./splashes');
 
-    var blendSFX = new Howl({ urls: ['../../sfx/blend_03.mp3'] });
-    var footstepSFX = new Howl({ urls: ['../../sfx/blender_footstep_03.mp3'] });
+    var blendSFX = new Howl({ urls: ['./sfx/blend_03.mp3'] });
+    var footstepSFX = new Howl({ urls: ['./sfx/blender_footstep_03.mp3'] });
 
     function Robot(world, options) {
 
