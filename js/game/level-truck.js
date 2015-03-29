@@ -74,8 +74,6 @@ define(function (require) {
     player1.body._box2d.entity.GetFixtureList().m_filter.maskBits = MASK_ROBOT;
 
     var orders = new OrderManager();
-    orders.createOrder();
-    orders.createOrder();
 
     state.update(function () {
 
@@ -89,6 +87,9 @@ define(function (require) {
             bumpTick = truck.bump();
 
         }
+
+        // create a new order occasioanlly if there is room
+        if (!((game.currentTick - 180) % 600)) orders.createOrder();
 
         // create a fruit occasionally of there are less than MAX_FRUIT
         if (!(game.currentTick % 60) && fruits.length < window.MAX_FRUIT) createFruit();
