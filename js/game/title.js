@@ -4,7 +4,7 @@ define(function (require) {
         Plastick = require('plastick');
 
     var game = require('./game');
-    var level = require('./level');
+    var howtoplay = require('./howtoplay');
 
     var state = new Plastick.State('intro');
 
@@ -41,7 +41,7 @@ define(function (require) {
 
                 if (e.type === 'press' && e.button === 'button_1') {
 
-                    game.changeState(level);
+                    game.changeState(howtoplay);
 
                 }
 
