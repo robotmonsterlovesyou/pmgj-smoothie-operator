@@ -113,7 +113,7 @@ define(function (require) {
 
         robot.update = function() {
 
-            console.log("phase: " + robot.walkPhase);
+            //console.log("phase: " + robot.walkPhase);
             if (robot.isWalking) {
                 robot.walkCount += 0.5
                 if (robot.walkCount > 10) {
@@ -122,7 +122,7 @@ define(function (require) {
                     robot.walkPhase += 1
                     if (robot.walkPhase > phaseTotal) {
                         robot.walkPhase = 1
-                    } 
+                    }
                 }
             } else {
                 robot.walkPhase = 0
@@ -171,31 +171,31 @@ define(function (require) {
                 console.log("weee!");
 
                 // if (walkPhase) {
-                    
+
                 // }
-                // bX = 
-                // bY = 
+                // bX =
+                // bY =
             }
 
             // knee ()
             var dX = leg.x - 25 * multi
             var dY = leg.y + 20
-            
+
             // bottom leg ===>
             var cX = leg.x - 30 * multi
             var cY = leg.y + 35
             var cRotate = 10 * multi
-            
+
             if (backLeg) {
                 stage.addToStage(leg.bodyJoint, { x: aX , y: aY});
                 stage.addToStage(leg.bottom, { x: cX, y: cY, rotate: cRotate});
-                stage.addToStage(leg.legJoint, { x: dX, y: dY}); 
+                stage.addToStage(leg.legJoint, { x: dX, y: dY});
                 stage.addToStage(leg.top, { x: bX, y: bY, rotate: bRotate});
             } else {
                 stage.addToStage(leg.bodyJoint, { x: aX , y: aY});
                 stage.addToStage(leg.top, { x: bX, y: bY, rotate: bRotate});
                 stage.addToStage(leg.bottom, { x: cX, y: cY, rotate: cRotate});
-                stage.addToStage(leg.legJoint, { x: dX, y: dY}); 
+                stage.addToStage(leg.legJoint, { x: dX, y: dY});
             }
         }
 
@@ -217,7 +217,7 @@ define(function (require) {
             drawLeg(stage, leg1, pos.x + 40, pos.y + 55, -1, true, robot.jumpCount, walkCount, walkPhase)
             drawLeg(stage, leg2, pos.x + 25, pos.y + 50, -1, true, robot.jumpCount, walkCount, walkPhase)
             drawLeg(stage, leg1, pos.x + 10, pos.y + 45, -1, true, robot.jumpCount, walkCount, walkPhase)
-            
+
             stage.addToStage(robot.img, { x: pos.x - 5, y: robotY, rotate: rotate });
             stage.addToStage(bottomOrange, { x: pos.x - 4, y: pos.y + robot.jumpCount*2.5})
             stage.addToStage(bottomYellow, { x: pos.x - 6, y: pos.y - 25 + robot.jumpCount*2.5})
