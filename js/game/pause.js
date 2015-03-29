@@ -31,6 +31,8 @@ define(function (require) {
 
     state.init(function (game) {
 
+        controller.resume();
+
         state.data.pause = window.performance.now();
     });
 
@@ -41,7 +43,7 @@ define(function (require) {
 
     state.update(function (game) {
 
-        /*var e;
+        var e;
 
         if (controller.queue.length) {
 
@@ -51,15 +53,15 @@ define(function (require) {
 
                 if (e.type === 'release' && e.button === 'button_1') {
 
-                    controller.queue = [];
                     game.popState();
+                    controller.queue = [];
                     return;
 
                 }
 
             }
 
-        }*/
+        }
 
     });
 

@@ -156,8 +156,8 @@ define(function (require) {
 
                 if (e.type === 'release' && e.button === 'start') {
 
-                    controller.queue = [];
                     game.pushState(pause);
+                    controller.queue = [];
                     return;
 
                 } else if (e.type === 'press' && e.button === 'button_1') {
