@@ -38,15 +38,14 @@ define(function (require) {
 
     OrderManager.prototype._fulfillOrder = function (id) {
 
-        var self = this,
-            points = self.orders[id].getPointValue();
+        var points = this.orders[id].getPointValue();
         console.log('Order ' + id + ' fulfilled! ' + points + ' points');
         this.orders[id].customer.setSatisfied();
-        setTimeout(function () {
-            slurpSFX[Math.round(Math.random() * (slurpSFX.length -1))].play().on('end', function () {
-                delete self.orders[id];
-            });
-        }, 500);
+        setTimeout((function (id) {
+            slurpSFX[Math.round(Math.random() * (slurpSFX.length -1))].play().on('end', (function (id) {
+                delete this.orders[id];
+            }).bind(this, id));
+        }).bind(this, id), 500);
 
         return points;
     };
