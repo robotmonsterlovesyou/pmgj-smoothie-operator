@@ -7,6 +7,7 @@ define(function (require) {
 
     var game = require('./game');
     var pause = require('./pause');
+    var endgame = require('./endgame');
 
     var FruitEntity = require('./entities/fruit');
     var TruckEntity = require('./entities/truck');
@@ -37,6 +38,8 @@ define(function (require) {
     var MASK_FRUIT = CATEGORY_WALLS | CATEGORY_FRUIT; // or ~CATEGORY_MONSTER
     var MASK_WALLS = CATEGORY_ROBOT | CATEGORY_FRUIT | CATEGORY_WALLS;
     var MASK_STUBS = CATEGORY_WALLS;
+
+    var MAX_LIVES = 3;
 
     window.MAX_FRUIT = 7;
 
@@ -87,6 +90,10 @@ define(function (require) {
 
         player1.checkFruits(fruits);
         player1.update();
+
+        if (player1.failures >= MAX_LIVES) {
+            game.pushState(endgame);
+        }
 
         if (orders.checkExpired()) {
             player1.failures += 1;
