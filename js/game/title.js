@@ -10,12 +10,24 @@ define(function (require) {
 
     var controller = require('./controller')(state);
 
-    var title = new Facade.Text('Hello World!', {
-        y: (game.stage.height() / 2) - 20,
-        width: game.stage.width(),
-        fontSize: 20,
-        textAlignment: 'center'
+    var title = new Facade.Text('Smoothie Operator', {
+        x: 600,
+        y: 150,
+        fontFamily: 'Passion One',
+        fontSize: 50,
+        fillStyle: '#333'
     });
+
+    var intructions = new Facade.Text('Press Space or A (Xbox Controller) to become a Smoothie Operator!', {
+        x: 600,
+        y: 210,
+        width: 400,
+        fontFamily: 'Passion One',
+        fontSize: 30,
+        fillStyle: '#333'
+    });
+
+    var splashScreen = new Facade.Image('./blender_images/hero.png', { y: 80 });
 
     state.update(function () {
 
@@ -42,7 +54,9 @@ define(function (require) {
     state.draw(function () {
 
         game.stage.clear();
+        game.stage.addToStage(splashScreen);
         game.stage.addToStage(title);
+        game.stage.addToStage(intructions);
 
     });
 
