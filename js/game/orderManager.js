@@ -13,6 +13,9 @@ define(function (require) {
 
     OrderManager.prototype.createOrder = function () {
 
+        var keys = Object.keys(this.orders),
+            available = [];
+
         if (this.orders.length < this.orderMax) {
             this.orders.push(new Order(2));
         }
@@ -21,12 +24,16 @@ console.log(this);
 
     OrderManager.prototype._fulfillOrder = function (id) {
 
-        //this.orders.splice();
+console.log('Order ' + id + ' fulfilled!');
+        delete this.orders[id];
     };
 
     OrderManager.prototype.checkOrders = function (fruits) {
 
-
+        var keys = Object.keys(this.orders);
+        for (var key = 0; key < this.orders.length; key += 1) {
+            if (order.check(fruits)) this._fulfillOrder(key);
+        }
     };
 
     OrderManager.prototype.keepOrdersPossible = function () {

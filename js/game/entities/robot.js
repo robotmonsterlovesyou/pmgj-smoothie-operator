@@ -103,6 +103,9 @@ define(function (require) {
         }
 
         var phaseTotal = 2
+
+        robot.imgShadow = new Facade.Image('blender_images/blender_shadow.png', { anchor: 'center' });
+
         robot.walking = false
         robot.walkCount = 0
         robot.walkPhase = 0
@@ -203,7 +206,7 @@ define(function (require) {
                     } else {
                         cRotate = 20 * multi + (walkCount * -4)
                     }
-                } 
+                }
             }
 
             if (backLeg) {
@@ -219,7 +222,8 @@ define(function (require) {
             }
         }
 
-        robot.draw = function (stage) {
+        robot.draw = function (stage, shadowY) {
+
             var pos = this.getPosition(),
             rotate = this.body.getOption('rotate');
 
@@ -231,11 +235,14 @@ define(function (require) {
             var walkCount = robot.walkCount
             var walkPhase = robot.walkPhase
 
+            // shadow
+            stage.addToStage(this.imgShadow, { x: pos.x, y: shadowY, scale: 1 - (shadowY - pos.y) / shadowY * 0.7 });
+
             // back
             drawLeg(stage, leg1, pos.x + 40, pos.y + 55, -1, true, robot.jumpCount, walkCount, walkPhase, false)
             drawLeg(stage, leg2, pos.x + 25, pos.y + 50, -1, true, robot.jumpCount, walkCount, walkPhase, true)
             drawLeg(stage, leg1, pos.x + 10, pos.y + 45, -1, true, robot.jumpCount, walkCount, walkPhase, false)
-            
+
             stage.addToStage(robot.img, { x: pos.x - 5, y: robotY, rotate: rotate });
             stage.addToStage(bottomOrange, { x: pos.x - 4, y: pos.y + robot.jumpCount*2.5})
             stage.addToStage(bottomYellow, { x: pos.x - 6, y: pos.y - 25 + robot.jumpCount*2.5})

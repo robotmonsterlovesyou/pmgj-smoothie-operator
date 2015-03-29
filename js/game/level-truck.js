@@ -187,7 +187,7 @@ define(function (require) {
         fruits.map(function (fruit) {
             fruit.draw(game.stage, platformY);
         });
-        player1.draw(game.stage);
+        player1.draw(game.stage, platformY);
 
     });
 
