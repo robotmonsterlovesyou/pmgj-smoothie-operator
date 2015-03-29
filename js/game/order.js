@@ -58,7 +58,7 @@ define(function (require) {
         this.number = number;
         this.fruits = [];
 
-        for (var i = 0; i < this.number; i += 1) {
+        for (var i = 0; i < 3; i += 1) {
             this.fruits.push(new Fruit());
         }
     };
@@ -72,9 +72,9 @@ define(function (require) {
         else return false;
     };
 
-    Order.prototype.draw = function (stage, offset, maxOrders) {
+    Order.prototype.draw = function (stage, offset) {
 
-        var size = { x: 200, y: 0 },
+        var size = { x: 240, y: 0 },
             x = this.number * size.x + offset.x,
             fruitOffset = [
                 { x: 20, y: -40 },

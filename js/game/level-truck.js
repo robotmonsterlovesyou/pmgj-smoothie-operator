@@ -79,6 +79,7 @@ define(function (require) {
 
     var orders = new OrderManager();
     orders.createOrder();
+    orders.createOrder();
 
     state.update(function () {
 

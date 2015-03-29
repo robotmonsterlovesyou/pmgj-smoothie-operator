@@ -14,14 +14,14 @@ define(function (require) {
     OrderManager.prototype.createOrder = function () {
 
         if (this.orders.length < this.orderMax) {
-            this.orders.push(new Order(3));
+            this.orders.push(new Order(2));
         }
 console.log(this);
     };
 
     OrderManager.prototype._fulfillOrder = function (id) {
 
-        this.orders.splice();
+        //this.orders.splice();
     };
 
     OrderManager.prototype.checkOrders = function (fruits) {
@@ -37,10 +37,10 @@ console.log(this);
 
     OrderManager.prototype.draw = function (stage, truckOffset) {
 
-        var offset = { x: 300, y: 100 + truckOffset },
+        var offset = { x: 390, y: 100 + truckOffset },
             keys = Object.keys(this.orders);
         for (var i = 0; i < keys.length; i += 1) {
-            this.orders[i].draw(stage, offset, this.orderMax);
+            this.orders[i].draw(stage, offset);
         }
     };
 
