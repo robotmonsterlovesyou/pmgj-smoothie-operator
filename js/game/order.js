@@ -16,7 +16,7 @@ define(function (require) {
 
         this.number = number;
         this.fruits = [];
-        this.timestamp = window.performanceNow();
+        this.timestamp = window.performance.now();
 
         this.offsetX = (this.number * 260 + 110);
 
