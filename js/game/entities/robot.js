@@ -267,7 +267,7 @@ define(function (require) {
             var walkCount = robot.walkCount
             var walkPhase = robot.walkPhase
 
-            if (robot.collidingFruits.length > 0) {
+            if (robot.collidingFruits.length > 0 && robot.fruits.length < 3) {
                 stage.addToStage(fruitHighlight, { x: pos.x - 5, y: robotY, rotate: rotate });
             }
 
