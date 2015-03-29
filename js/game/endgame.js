@@ -28,7 +28,7 @@ define(function (require) {
 
         controller.resume();
 
-        peptalk = new Facade.Text('You need to work on your\nsmoothie making skills.\nSo many unhappy customer!', {
+        peptalk = new Facade.Text('You need to work on your\nsmoothie making skills.\nSo many unhappy customers!', {
             y: 150,
             width: game.stage.width(),
             fontFamily: 'Passion One',
