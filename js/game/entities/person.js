@@ -17,7 +17,7 @@ define(function (require) {
             },
             victory: {
                 image: './blender_images/people_arms2_victory.png',
-                options: { x: -90, y: -57 }
+                options: { x: -120, y: -57 }
             }
         },
         {
@@ -31,7 +31,7 @@ define(function (require) {
             },
             victory: {
                 image: './blender_images/people_arms1_victory.png',
-                options: { x: -110, y: -57 }
+                options: { x: -130, y: -57 }
             }
         },
         {
@@ -45,7 +45,7 @@ define(function (require) {
             },
             victory: {
                 image: './blender_images/people_arms2_victory.png',
-                options: { x: -110, y: -57 }
+                options: { x: -130, y: -57 }
             }
         }
     ]

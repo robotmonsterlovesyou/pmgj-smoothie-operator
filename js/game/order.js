@@ -27,6 +27,8 @@ define(function (require) {
 
         this.customer = new PersonEntity(Math.floor(Math.random() * 3), { x: '+=' + this.offsetX });
 
+        this.customer.satisfied = false;
+
         for (var i = 0; i < 3; i += 1) {
             this.fruits.push(new Fruit());
         }
@@ -91,7 +93,15 @@ define(function (require) {
                 { x: -40, y: 10 },
             ];
 
-        game.stage.addToStage(this.customer.entities.arms, { y: '+=' + offset.y });
+        if (this.customer.satisfied) {
+
+            game.stage.addToStage(this.customer.entities.victory, { y: '+=' + offset.y });
+
+        } else {
+
+            game.stage.addToStage(this.customer.entities.arms, { y: '+=' + offset.y });
+
+        }
 
         // draw speech bubble
         stage.addToStage(imgBubble, { x: this.offsetX + bubbleOffsetX, y: offset.y + bubbleOffsetY });
