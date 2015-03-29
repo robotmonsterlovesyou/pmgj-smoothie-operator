@@ -304,9 +304,10 @@ define(function (require) {
         // returns true if order was delivered
         robot.deliverOrder = function(orders) {
 
-            if (orders.checkOrders(robot.fruits)) {
+            var points = orders.checkOrders(robot.fruits);
+            if (points !== 0) {
                 // order matched and delivered
-                robot.score += robot.fruits.length;
+                robot.score += points;
                 robot.flushFruits();
                 return true;
             } else {

@@ -12,11 +12,16 @@ define(function (require) {
     var imgBubble = new Facade.Image('blender_images/patrons_bubble.png', { anchor: 'center' }),
         imgHighlight = new Facade.Image('blender_images/fruit_highlights.png', { anchor: 'center' });
 
+    var ORDER_WAIT_TIME = 60000;
+    var MIN_WAIT_TIME = 10000;
+
     function Order(number) {
 
         this.number = number;
         this.fruits = [];
         this.timestamp = window.performance.now();
+
+        this.waitTime = ORDER_WAIT_TIME;
 
         this.offsetX = (this.number * 260 + 110);
 
@@ -25,6 +30,27 @@ define(function (require) {
         for (var i = 0; i < 3; i += 1) {
             this.fruits.push(new Fruit());
         }
+    };
+
+    Order.prototype.getWaitTime = function() {
+
+        return this.waitTime;
+    };
+
+    Order.prototype.getMinWaitTime = function() {
+
+        return MIN_WAIT_TIME;
+    };
+
+    Order.prototype.getPointValue = function() {
+
+        var points = Math.floor((this.timestamp + this.waitTime - window.performance.now()) / 1000) * 10;
+        return points > 0 ? points : 0;
+    };
+
+    Order.prototype.cleanup = function () {
+
+        ORDER_WAIT_TIME -= 3000;
     };
 
     // if passed fruits are same as this.fruits, return true

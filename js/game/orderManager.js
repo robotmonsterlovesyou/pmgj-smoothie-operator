@@ -29,8 +29,10 @@ define(function (require) {
 
     OrderManager.prototype._fulfillOrder = function (id) {
 
-console.log('Order ' + id + ' fulfilled! ');
+        var points = this.orders[id].getPointValue();
+console.log('Order ' + id + ' fulfilled! ' + points + ' points');
         delete this.orders[id];
+        return points;
     };
 
     OrderManager.prototype.checkOrders = function (fruits) {
@@ -38,11 +40,10 @@ console.log('Order ' + id + ' fulfilled! ');
         var keys = Object.keys(this.orders);
         for (var key = 0; key < keys.length; key += 1) {
             if (this.orders[keys[key]].check(fruits)) {
-                this._fulfillOrder(keys[key]);
-                return true;
+                return this._fulfillOrder(keys[key]);
             }
         }
-        return false;
+        return 0;
     };
 
     OrderManager.prototype.keepOrdersPossible = function () {
