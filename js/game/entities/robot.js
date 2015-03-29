@@ -21,6 +21,11 @@ define(function (require) {
         new Howl({ urls: ['./sfx/blender_footstep_02.mp3'], volume: 0.25 }),
         new Howl({ urls: ['./sfx/blender_footstep_03.mp3'], volume: 0.25 })
     ];
+    var landedSFX = [
+        new Howl({ urls: ['./sfx/blender_land_01.mp3'], volume: 0.25 }),
+        new Howl({ urls: ['./sfx/blender_land_02.mp3'], volume: 0.25 }),
+        new Howl({ urls: ['./sfx/blender_land_03.mp3'], volume: 0.25 })
+    ];
 
     var jumpPrepareSFX = new Howl({ urls: ['./sfx/jump_prepare.mp3'], volume: 0.5 });
     var jumpReleaseSFX = new Howl({ urls: ['./sfx/jump_release.mp3'], volume: 0.5 });
