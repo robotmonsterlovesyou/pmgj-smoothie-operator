@@ -88,12 +88,14 @@ define(function (require) {
 
         ui.entities.time.setText(ui.entities.time.value.replace(/[0-9]+/, Math.round(game.gameTime() / 1000)));
 
+        /*
         truck.entities.clouds.forEach(function (cloud) {
-            // cloud.setOptions({ x: '-=5' });
+            cloud.setOptions({ x: '-=5' });
             if (cloud.getOption('x') < -game.stage.width()) {
                 cloud.setOptions({ x: game.stage.width() });
             }
         });
+        */
 
         player1.checkFruits(fruits);
         player1.update();
