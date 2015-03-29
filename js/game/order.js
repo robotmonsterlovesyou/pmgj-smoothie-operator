@@ -91,17 +91,17 @@ define(function (require) {
                 { x: -40, y: 10 },
             ];
 
-        if (parseFloat(this.customer.entities.timer.value) <= 10) {
-
-            game.stage.addToStage(this.customer.entities.timer, { y: '+=' + offset.y });
-
-        }
-
         if (this.customer.state.satisfied) {
 
             game.stage.addToStage(this.customer.entities.victory, { y: '+=' + offset.y });
 
         } else {
+
+            if (parseFloat(this.customer.entities.timer.value) <= 10) {
+
+                game.stage.addToStage(this.customer.entities.timer, { y: '+=' + offset.y });
+
+            }
 
             game.stage.addToStage(this.customer.entities.arms, { y: '+=' + offset.y });
 
