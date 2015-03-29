@@ -39,43 +39,44 @@ define(function (require) {
     var MASK_WALLS = CATEGORY_ROBOT | CATEGORY_FRUIT | CATEGORY_WALLS;
     var MASK_STUBS = CATEGORY_WALLS;
 
+    window.MAX_FRUIT = 7;
+
     function addWallFiltering(wall) {
-        wall._box2d.entity.GetFixtureList().m_filter.categoryBits = CATEGORY_WALLS
-        wall._box2d.entity.GetFixtureList().m_filter.maskBits = MASK_WALLS
+        wall._box2d.entity.GetFixtureList().m_filter.categoryBits = CATEGORY_WALLS;
+        wall._box2d.entity.GetFixtureList().m_filter.maskBits = MASK_WALLS;
     }
 
     function addStubFiltering(wall) {
-        wall._box2d.entity.GetFixtureList().m_filter.categoryBits = CATEGORY_WALLS
-        wall._box2d.entity.GetFixtureList().m_filter.maskBits = MASK_WALLS
+        wall._box2d.entity.GetFixtureList().m_filter.categoryBits = CATEGORY_WALLS;
+        wall._box2d.entity.GetFixtureList().m_filter.maskBits = MASK_WALLS;
     }
 
-    addWallFiltering(truck.entities.ceiling)
-    addWallFiltering(truck.entities.floor)
-    addWallFiltering(truck.entities.wallLeft)
-    addWallFiltering(truck.entities.wallRight)
-    addWallFiltering(truck.entities.platform)
-    addStubFiltering(truck.entities.platformBufferLeft)
-    addStubFiltering(truck.entities.platformBufferRight)
+    function createFruit() {
+
+        var fruit = new FruitEntity(world, '', {
+            x: Math.random() * (game.stage.width() - 100) + 50,
+            y: 50
+        });
+        fruit.setVelocity(Math.random() * 6 - 3, Math.random() * 2 - 1);
+        fruit.body._box2d.entity.GetFixtureList().m_filter.categoryBits = CATEGORY_FRUIT;
+        fruit.body._box2d.entity.GetFixtureList().m_filter.maskBits = MASK_FRUIT;
+        fruits.push(fruit);
+    }
+
+    addWallFiltering(truck.entities.ceiling);
+    addWallFiltering(truck.entities.floor);
+    addWallFiltering(truck.entities.wallLeft);
+    addWallFiltering(truck.entities.wallRight);
+    addWallFiltering(truck.entities.platform);
+    addStubFiltering(truck.entities.platformBufferLeft);
+    addStubFiltering(truck.entities.platformBufferRight);
 
     var fruitTypes = ['apple', 'orange', 'banana', 'strawberry', 'blueberry'];
     var fruits = [];
 
-    fruits.push(FruitEntity(world, '', { x: 200, y: 130 }));
-    fruits.push(FruitEntity(world, '', { x: 300, y: 100 }));
-    fruits.push(FruitEntity(world, '', { x: 400, y: 120 }));
-    fruits.push(FruitEntity(world, '', { x: 500, y: 80 }));
-    fruits.push(FruitEntity(world, '', { x: 600, y: 80 }));
-    fruits.push(FruitEntity(world, '', { x: 700, y: 100 }));
-    fruits.push(FruitEntity(world, '', { x: 800, y: 100 }));
-
-    fruits.forEach(function(fruit) {
-        fruit.body._box2d.entity.GetFixtureList().m_filter.categoryBits = CATEGORY_FRUIT
-        fruit.body._box2d.entity.GetFixtureList().m_filter.maskBits = MASK_FRUIT
-    });
-
     var player1 = new RobotEntity(world, {x: 500, y:100});
-    player1.body._box2d.entity.GetFixtureList().m_filter.categoryBits = CATEGORY_ROBOT
-    player1.body._box2d.entity.GetFixtureList().m_filter.maskBits = MASK_ROBOT
+    player1.body._box2d.entity.GetFixtureList().m_filter.categoryBits = CATEGORY_ROBOT;
+    player1.body._box2d.entity.GetFixtureList().m_filter.maskBits = MASK_ROBOT;
 
     var orders = new OrderManager();
     orders.createOrder();
@@ -94,6 +95,10 @@ define(function (require) {
 
         }
 
+        // create a fruit occasionally of there are less than MAX_FRUIT
+        if (!(game.currentTick % 60) && fruits.length < window.MAX_FRUIT) createFruit();
+
+        // jostle truck left/right occasionally (fruits move, camera doesn't)
         if (!(game.currentTick % 100)) {
 
             var velocity = Math.floor(Math.random() * 2) === 1 ? 1 : -1;

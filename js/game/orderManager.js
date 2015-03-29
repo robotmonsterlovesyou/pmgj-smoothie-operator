@@ -19,7 +19,7 @@ define(function (require) {
         if (this.orders.length < this.orderMax) {
             this.orders.push(new Order(2));
         }
-console.log(this);
+//console.log(this);
     };
 
     OrderManager.prototype._fulfillOrder = function (id) {
