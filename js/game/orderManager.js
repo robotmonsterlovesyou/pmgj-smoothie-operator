@@ -50,6 +50,8 @@ console.log('Order ' + id + ' fulfilled! ' + points + ' points');
         return points;
     };
 
+    // returns points awarded if an order was fulfilled
+    // returns -1 if no orders fulfilled
     OrderManager.prototype.checkOrders = function (fruits) {
 
         var keys = Object.keys(this.orders);
@@ -60,6 +62,27 @@ console.log('Order ' + id + ' fulfilled! ' + points + ' points');
         }
         return -1;
     };
+
+    // returns an array of fruits that are needed and are not currently
+    //   on the board
+    OrderManager.prototype.getNeededFruits = function (existingFruits) {
+
+        var orderFruits = [];
+        var oldFruits = existingFruits.slice(0);
+
+        for (var order in this.orders) {
+            for(var fruit in this.orders[order].fruits) {
+                orderFruits.push(this.orders[order].fruits[fruit].type);
+            }
+        }
+
+        for (var fruit in oldFruits) {
+            var found = orderFruits.indexOf(oldFruits[fruit].type);
+            if (found !== -1) orderFruits.splice(found, 1);
+        }
+
+        return orderFruits;
+    }
 
     OrderManager.prototype.checkExpired = function () {
 

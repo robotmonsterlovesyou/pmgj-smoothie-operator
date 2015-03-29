@@ -53,9 +53,9 @@ define(function (require) {
         wall._box2d.entity.GetFixtureList().m_filter.maskBits = MASK_WALLS;
     }
 
-    function createFruit() {
+    function createFruit(fruitType) {
 
-        var fruit = new FruitEntity(world, '', {
+        var fruit = new FruitEntity(world, fruitType, {
             x: Math.random() * (game.stage.width() - 100) + 50,
             y: 50
         });
@@ -110,7 +110,14 @@ define(function (require) {
         if (!((game.currentTick - 180) % 600)) orders.createOrder();
 
         // create a fruit occasionally of there are less than MAX_FRUIT
-        if (!(game.currentTick % 60) && fruits.length < window.MAX_FRUIT) createFruit();
+        // make sure new fruit helps make orderes possible
+        if (!(game.currentTick % 60) && fruits.length < window.MAX_FRUIT) {
+
+            var neededFruits = orders.getNeededFruits(fruits);
+            if(neededFruits.length > 0) createFruit(neededFruits[Math.floor(Math.random() * neededFruits.length)]);
+            else createFruit();
+
+        }
 
         // jostle truck left/right occasionally (fruits move, camera doesn't)
         if (!(game.currentTick % 100)) {
