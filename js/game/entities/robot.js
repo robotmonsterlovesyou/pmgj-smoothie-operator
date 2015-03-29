@@ -5,6 +5,8 @@ define(function (require) {
 
     require('facadejs-Box2D-plugin');
 
+    var splashes = require('./splashes');
+
     function Robot(world, options) {
 
         var FRUIT_RADIUS = 27
@@ -85,7 +87,10 @@ define(function (require) {
             }
         }
 
-        robot.flushFruits = function () {
+        robot.flushFruits = function (leaveSpill) {
+            if (leaveSpill && robot.fruits.length) {
+                splashes.addSplash(robot.fObject.getOption('x'), robot.fruits);
+            }
             robot.fruits = [];
         };
 

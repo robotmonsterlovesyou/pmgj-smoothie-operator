@@ -13,6 +13,8 @@ define(function (require) {
 
     var OrderManager = require('./orderManager');
 
+    var splashes = require('./entities/splashes');
+
     var state = new Plastick.State('level');
 
     var controller = require('./controller')(state);
@@ -137,7 +139,7 @@ define(function (require) {
 
                 } else if (e.type === 'press' && e.button === 'button_3') {
 
-                    player1.flushFruits();
+                    player1.flushFruits(true);
 
                 } else if (e.type === 'hold' && e.button === 'd_pad_left') {
 
@@ -186,6 +188,8 @@ define(function (require) {
         game.stage.addToStage(truck.entities.background, {
             y: '-=' + (startingTruckPlatformPos - platformY)
         });
+
+        game.stage.addToStage(splashes.entities.splashes, { y: '-=' + (startingTruckPlatformPos - platformY)});
 
         orders.afterTruckDraw(game.stage, platformY - startingTruckPlatformPos);
 
