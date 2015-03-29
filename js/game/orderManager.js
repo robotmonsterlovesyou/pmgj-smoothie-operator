@@ -17,9 +17,8 @@ define(function (require) {
             available = [];
 
         if (this.orders.length < this.orderMax) {
-            this.orders.push(new Order(2));
+            this.orders.push(new Order(1));
         }
-//console.log(this);
     };
 
     OrderManager.prototype._fulfillOrder = function (id) {
@@ -42,12 +41,23 @@ console.log('Order ' + id + ' fulfilled!');
         // make sure there are active fruits for the current orders
     }
 
-    OrderManager.prototype.draw = function (stage, truckOffset) {
+    OrderManager.prototype.beforeTruckDraw = function (stage, truckOffset) {
 
-        var offset = { x: 390, y: 100 + truckOffset },
+        var offset = { y: truckOffset },
             keys = Object.keys(this.orders);
+
         for (var i = 0; i < keys.length; i += 1) {
-            this.orders[i].draw(stage, offset);
+            this.orders[i].beforeTruckDraw(stage, offset);
+        }
+    };
+
+    OrderManager.prototype.afterTruckDraw = function (stage, truckOffset) {
+
+        var offset = { y: truckOffset },
+            keys = Object.keys(this.orders);
+
+        for (var i = 0; i < keys.length; i += 1) {
+            this.orders[i].afterTruckDraw(stage, offset);
         }
     };
 
