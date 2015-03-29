@@ -54,22 +54,31 @@ define(function (require) {
 
         robot.jumping = false;
         robot.jumpCount = 0;
+        robot.jumpCanFinish = false
 
-        robot.jump = function() {
+        robot.startJump = function() {
             if (robot.getPosition().y > 440) {
-                console.log("jump")
-                
-                robot.jumpCount = 0;
                 robot.jumping = true;
+                robot.jumpCanFinish = false;
             }
         }
 
-        robot.turnLeft = function() {
-
+        robot.finishJump = function() {
+            robot.jumpCanFinish = true
         }
 
-        robot.turnRight = function() {
+        robot.resetWalking = function() {
+            robot.isWalking = false
+        }
 
+        robot.walkLeft = function() {
+            robot.isWalking = true
+            console.log("walkLeft")
+        }
+
+        robot.walkRight = function() {
+            robot.isWalking = true
+            console.log("walkRight")
         }
 
         robot.blendFruit = function() {
@@ -80,9 +89,8 @@ define(function (require) {
 
         robot.img = new Facade.Image( 'blender_images/blender_body.png', { anchor: 'center' });
 
-
         var leg1 = {
-            bodyJoint: new Facade.Image( 'blender_images/blender_smalljoint1.png', { anchor: 'center' }),
+            bodyJoint: new Facade.Image( 'blender_images/blender_smalljoint2.png', { anchor: 'center' }),
             top: new Facade.Image( 'blender_images/blender_leg_upper.png', { anchor: 'top' }),
             legJoint: new Facade.Image( 'blender_images/blender_smalljoint2.png', { anchor: 'center' }),
             bottom: new Facade.Image( 'blender_images/blender_leg_lower.png', { anchor: 'center' }),
@@ -90,24 +98,48 @@ define(function (require) {
         }
 
         var leg2 = {
-            bodyJoint: new Facade.Image( 'blender_images/blender_smalljoint1.png', { anchor: 'center' }),
+            bodyJoint: new Facade.Image( 'blender_images/blender_smalljoint2.png', { anchor: 'center' }),
             top: new Facade.Image( 'blender_images/blender_leg_upper.png', { anchor: 'top' }),
             legJoint: new Facade.Image( 'blender_images/blender_smalljoint2.png', { anchor: 'center' }),
             bottom: new Facade.Image( 'blender_images/blender_leg_lower.png', { anchor: 'center' }),
         }
 
+        var phaseTotal = 3
+        robot.walking = false
+        robot.walkCount = 0
+        robot.walkPhase = 0
+
         var JUMP_MAX = 10
+
         robot.update = function() {
+
+            console.log("phase: " + robot.walkPhase);
+            if (robot.isWalking) {
+                robot.walkCount += 0.5
+                if (robot.walkCount > 10) {
+                    robot.walkCount = 0
+
+                    robot.walkPhase += 1
+                    if (robot.walkPhase > phaseTotal) {
+                        robot.walkPhase = 1
+                    } 
+                }
+            } else {
+                robot.walkPhase = 0
+            }
+
             if (robot.jumping == true) {
                 robot.jumpCount += 1;
-                console.log("jumping!");
                 if (robot.jumpCount > JUMP_MAX) {
-                    robot.setVelocity(null, -15);
+                    robot.jumpCount = JUMP_MAX
                     robot.jumping = false
-                    robot.jumpCount = 0
-
                 }
-                    console.log("jump: " + robot.jumpCount)
+            }
+
+            if (robot.jumping == false && robot.jumpCanFinish == true && robot.jumpCount == JUMP_MAX) {
+                robot.setVelocity(null, -18);
+                robot.jumpCanFinish = false;
+                robot.jumpCount = 0;
             }
         }
 
@@ -115,43 +147,85 @@ define(function (require) {
         bottomYellow = new Facade.Image( 'blender_images/fruit_2_blended1.png', {anchor: 'center'});
         bottomGreen = new Facade.Image( 'blender_images/fruit_1_blended1.png', {anchor: 'center'});
 
-        function drawLeg (stage, leg, x, y, multi, jumpCount) {
+        function drawLeg (stage, leg, x, y, multi, backLeg, jumpCount, walkPhase, walkCount) {
             leg.x = x
             leg.y = y
 
+            // top joint ()
+            var aX = leg.x
+            var aY = leg.y + (jumpCount * 2.5)
+            if (backLeg) {
+                aY = leg.y + (jumpCount * 2)
+            }
 
-            stage.addToStage(leg.bodyJoint, { x: leg.x, y: leg.y + (jumpCount * 2.5)});
-            stage.addToStage(leg.top, { x: leg.x - 5, y: leg.y + (jumpCount * 2.5)  , rotate: (jumpCount*4) + 50 * multi});
-            stage.addToStage(leg.bottom, { x: leg.x - 30 * multi, y: leg.y + 35, rotate: 10 * multi});
-            stage.addToStage(leg.legJoint, { x: leg.x - 25 * multi, y: leg.y + 20});
+            // top leg ====
+            var bX = leg.x - 5 + (jumpCount*0.5)
+            var bY = leg.y + (jumpCount * 2.0)
+            var bRotate = (jumpCount*5) + 50 * multi
+            if (backLeg) {
+                bX = leg.x - 5 + (jumpCount*0.1*multi)
+                bY = leg.y + (jumpCount * 2.8)
+                bRotate = (jumpCount*5 * multi) + 50 * multi
+            }
+            if (walkPhase > 0) {
+                console.log("weee!");
+
+                // if (walkPhase) {
+                    
+                // }
+                // bX = 
+                // bY = 
+            }
+
+            // knee ()
+            var dX = leg.x - 25 * multi
+            var dY = leg.y + 20
+            
+            // bottom leg ===>
+            var cX = leg.x - 30 * multi
+            var cY = leg.y + 35
+            var cRotate = 10 * multi
+            
+            if (backLeg) {
+                stage.addToStage(leg.bodyJoint, { x: aX , y: aY});
+                stage.addToStage(leg.bottom, { x: cX, y: cY, rotate: cRotate});
+                stage.addToStage(leg.legJoint, { x: dX, y: dY}); 
+                stage.addToStage(leg.top, { x: bX, y: bY, rotate: bRotate});
+            } else {
+                stage.addToStage(leg.bodyJoint, { x: aX , y: aY});
+                stage.addToStage(leg.top, { x: bX, y: bY, rotate: bRotate});
+                stage.addToStage(leg.bottom, { x: cX, y: cY, rotate: cRotate});
+                stage.addToStage(leg.legJoint, { x: dX, y: dY}); 
+            }
         }
 
         robot.draw = function (stage) {
 
 
             var pos = this.getPosition(),
-                rotate = this.body.getOption('rotate');
+            rotate = this.body.getOption('rotate');
 
-                pos.y = pos.y - 20
+            pos.y = pos.y - 45
 
             var robotY = pos.y
-            if (robot.jumping) {
-                robotY = robotY + (robot.jumpCount*2.5)
-            }
+            robotY = robotY + (robot.jumpCount*2.5)
+
+            var walkCount = robot.walkCount
+            var walkPhase = robot.walkPhase
 
             // back
-            drawLeg(stage, leg1, pos.x + 40, pos.y + 55, -1, robot.jumpCount)
-            drawLeg(stage, leg2, pos.x + 25, pos.y + 50, -1, robot.jumpCount)
-            drawLeg(stage, leg1, pos.x + 10, pos.y + 45, -1, robot.jumpCount)
+            drawLeg(stage, leg1, pos.x + 40, pos.y + 55, -1, true, robot.jumpCount, walkCount, walkPhase)
+            drawLeg(stage, leg2, pos.x + 25, pos.y + 50, -1, true, robot.jumpCount, walkCount, walkPhase)
+            drawLeg(stage, leg1, pos.x + 10, pos.y + 45, -1, true, robot.jumpCount, walkCount, walkPhase)
             
             stage.addToStage(robot.img, { x: pos.x - 5, y: robotY, rotate: rotate });
             stage.addToStage(bottomOrange, { x: pos.x - 4, y: pos.y + robot.jumpCount*2.5})
             stage.addToStage(bottomYellow, { x: pos.x - 6, y: pos.y - 25 + robot.jumpCount*2.5})
             stage.addToStage(bottomGreen, { x: pos.x - 8, y: pos.y - 50 + robot.jumpCount*2.5})
 
-            drawLeg(stage, leg1, pos.x - 40, pos.y + 50, 1, robot.jumpCount)
-            drawLeg(stage, leg2, pos.x - 25, pos.y + 55, 1, robot.jumpCount)
-            drawLeg(stage, leg1, pos.x - 10, pos.y + 60, 1, robot.jumpCount)
+            drawLeg(stage, leg1, pos.x - 40, pos.y + 50, 1, false, robot.jumpCount, walkCount, walkPhase)
+            drawLeg(stage, leg2, pos.x - 25, pos.y + 55, 1, false, robot.jumpCount, walkCount, walkPhase)
+            drawLeg(stage, leg1, pos.x - 10, pos.y + 60, 1, false, robot.jumpCount, walkCount, walkPhase)
         };
 
         // returns true if order was delivered

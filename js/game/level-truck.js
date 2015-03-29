@@ -100,6 +100,8 @@ define(function (require) {
 
         }
 
+        player1.resetWalking() 
+        
         if (controller.queue.length) {
 
              while (controller.queue.length) {
@@ -107,8 +109,10 @@ define(function (require) {
                 e = controller.queue.shift();
 
                 if (e.type === 'press' && e.button === 'button_1') {
+                    player1.startJump()
 
-                    player1.jump();
+                } else if (e.type === 'release' && e.button === 'button_1') {
+                    player1.finishJump()
 
                 } else if (e.type === 'press' && e.button === 'button_3') {
 
@@ -117,12 +121,12 @@ define(function (require) {
                 } else if (e.type === 'hold' && e.button === 'd_pad_left') {
 
                     player1.setVelocity(-10, null);
-                    player1.turnLeft()
+                    player1.walkLeft()
 
                 } else if (e.type === 'hold' && e.button === 'd_pad_right') {
 
                     player1.setVelocity(10, null);
-                    player1.turnRight()
+                    player1.walkRight()
 
                 } else if (e.type === 'hold' && e.button === 'stick_axis_left') {
 
