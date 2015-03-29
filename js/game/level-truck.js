@@ -120,7 +120,7 @@ define(function (require) {
                 } else if (e.type === 'release' && e.button === 'button_1') {
                     player1.finishJump()
 
-                } else if (e.type === 'press' && e.button === 'button_3') {
+                } else if (e.type === 'press' && e.button === 'button_2') {
 
                     player1.collidingFruits.forEach(function (fruit) {
 
@@ -130,6 +130,10 @@ define(function (require) {
 
                         fruits.splice(fruits.indexOf(fruit), 1);
                     });
+
+                } else if (e.type === 'press' && e.button === 'button_3') {
+
+                    player1.flushFruits();
 
                 } else if (e.type === 'hold' && e.button === 'd_pad_left') {
 

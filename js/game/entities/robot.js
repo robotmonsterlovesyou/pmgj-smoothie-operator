@@ -85,6 +85,10 @@ define(function (require) {
             }
         }
 
+        robot.flushFruits = function () {
+            robot.fruits = [];
+        };
+
         robot.img = new Facade.Image( 'blender_images/blender_body.png', { anchor: 'center' });
 
         var leg1 = {
@@ -154,7 +158,7 @@ define(function (require) {
         bottomBlue = new Facade.Image( 'blender_images/fruit_5_blended1.png', {anchor: 'center'});
 
         fruitHighlight = new Facade.Image( 'blender_images/blender_highlight.png', {anchor: 'center'});
-        
+
         function drawLeg (stage, leg, x, y, multi, backLeg, jumpCount, walkCount, walkPhase, middle) {
             leg.x = x
             leg.y = y
@@ -265,7 +269,7 @@ define(function (require) {
             drawLeg(stage, leg1, pos.x + 10, pos.y + 45, -1, true, robot.jumpCount, walkCount, walkPhase, false)
             drawLeg(stage, leg2, pos.x + 25, pos.y + 50, -1, true, robot.jumpCount, walkCount, walkPhase, true)
             drawLeg(stage, leg1, pos.x + 40, pos.y + 55, -1, true, robot.jumpCount, walkCount, walkPhase, false)
-            
+
             stage.addToStage(robot.img, { x: pos.x - 5, y: robotY, rotate: rotate });
 
             if (robot.fruits[0]) {

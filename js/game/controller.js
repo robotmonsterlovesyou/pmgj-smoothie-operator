@@ -20,7 +20,8 @@ define(function (require) {
 
         controller.setCustomMapping('keyboard', {
             'button_1': 32,
-            'button_3': 13,
+            'button_2': 13,
+            'button_3': 220,
             'start': 27,
             'd_pad_up': [38, 87],
             'd_pad_down': [40, 83],
