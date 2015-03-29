@@ -126,9 +126,9 @@ define(function (require) {
 
                         fruit.body.Box2D('destroyObject');
 
-                        fruits.splice(fruits.indexOf(fruit), 1);
+                        player1.addFruit(fruit.type);
 
-                        player1.addFruit(fruit.type)
+                        fruits.splice(fruits.indexOf(fruit), 1);
                     });
 
                 } else if (e.type === 'hold' && e.button === 'd_pad_left') {
