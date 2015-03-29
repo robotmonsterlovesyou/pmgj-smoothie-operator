@@ -305,7 +305,7 @@ define(function (require) {
         robot.deliverOrder = function(orders) {
 
             var points = orders.checkOrders(robot.fruits);
-            if (points !== 0) {
+            if (points > 0) {
                 // order matched and delivered
                 robot.score += points;
                 robot.flushFruits();
