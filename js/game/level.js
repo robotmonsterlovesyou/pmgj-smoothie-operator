@@ -1,7 +1,8 @@
 define(function (require) {
 
     var Facade = require('facade'),
-        Plastick = require('plastick');
+        Plastick = require('plastick'),
+        Howl = require('howler').Howl;
 
     require('facadejs-Box2D-plugin');
 
@@ -29,6 +30,9 @@ define(function (require) {
     var startingTruckPlatformPos = truck.entities.platform.getOption('y');
 
     var bumpTick = truck.bump();
+
+    var backgroundSFX = new Howl({ urls: ['./sfx/theme.wav'], volume: 1.0, loop: true });
+    var ambienceSFX = new Howl({ urls: ['./sfx/ambience.wav'], volume: 1.0, loop: true });
 
     var CATEGORY_ROBOT = 0x0001; // 0000000000000001 in binary
     var CATEGORY_FRUIT = 0x0002; // 0000000000000010 in binary
@@ -83,6 +87,9 @@ define(function (require) {
     var orders = new OrderManager();
 
     state.init(function (game) {
+
+        backgroundSFX.fadeIn(0.5, 2000);
+        ambienceSFX.fadeIn(1.0, 2000);
 
         game.data.pauseTime = 0;
         controller.resume();
