@@ -9,11 +9,11 @@ define(function (require) {
         {
             face: {
                 image: './blender_images/sprite_face_1.png',
-                options: { x: 80, y: 70, width: 155, frames: [0, 1] }
+                options: { x: 60, y: 70, width: 155, frames: [0, 1] }
             },
             arms: {
                 image: './blender_images/people_arms2.png',
-                options: { x: 0, y: 170 }
+                options: { x: 0, y: 182 }
             },
             victory: {
                 image: './blender_images/people_arms2_victory.png',
@@ -23,11 +23,11 @@ define(function (require) {
         {
             face: {
                 image: './blender_images/sprite_face_2.png',
-                options: { x: 80, y: 70, width: 118, frames: [0, 1] }
+                options: { x: 60, y: 70, width: 118, frames: [0, 1] }
             },
             arms: {
                 image: './blender_images/people_arms1.png',
-                options: { x: 0, y: 170 }
+                options: { x: 0, y: 182 }
             },
             victory: {
                 image: './blender_images/people_arms1_victory.png',
@@ -37,11 +37,11 @@ define(function (require) {
         {
             face: {
                 image: './blender_images/sprite_face_3.png',
-                options: { x: 80, y: 90, width: 123, frames: [0, 1] }
+                options: { x: 60, y: 90, width: 123, frames: [0, 1] }
             },
             arms: {
                 image: './blender_images/people_arms2.png',
-                options: { x: 0, y: 170 }
+                options: { x: 0, y: 182 }
             },
             victory: {
                 image: './blender_images/people_arms2_victory.png',
