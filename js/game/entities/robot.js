@@ -73,12 +73,10 @@ define(function (require) {
 
         robot.walkLeft = function() {
             robot.isWalking = true
-            console.log("walkLeft")
         }
 
         robot.walkRight = function() {
             robot.isWalking = true
-            console.log("walkRight")
         }
 
         robot.blendFruit = function() {
@@ -93,7 +91,7 @@ define(function (require) {
             bodyJoint: new Facade.Image( 'blender_images/blender_smalljoint2.png', { anchor: 'center' }),
             top: new Facade.Image( 'blender_images/blender_leg_upper.png', { anchor: 'top' }),
             legJoint: new Facade.Image( 'blender_images/blender_smalljoint2.png', { anchor: 'center' }),
-            bottom: new Facade.Image( 'blender_images/blender_leg_lower.png', { anchor: 'center' }),
+            bottom: new Facade.Image( 'blender_images/blender_leg_lower.png', { anchor: 'top' }),
 
         }
 
@@ -101,10 +99,10 @@ define(function (require) {
             bodyJoint: new Facade.Image( 'blender_images/blender_smalljoint2.png', { anchor: 'center' }),
             top: new Facade.Image( 'blender_images/blender_leg_upper.png', { anchor: 'top' }),
             legJoint: new Facade.Image( 'blender_images/blender_smalljoint2.png', { anchor: 'center' }),
-            bottom: new Facade.Image( 'blender_images/blender_leg_lower.png', { anchor: 'center' }),
+            bottom: new Facade.Image( 'blender_images/blender_leg_lower.png', { anchor: 'top' }),
         }
 
-        var phaseTotal = 3
+        var phaseTotal = 2
         robot.walking = false
         robot.walkCount = 0
         robot.walkPhase = 0
@@ -113,8 +111,11 @@ define(function (require) {
 
         robot.update = function() {
 
-            console.log("phase: " + robot.walkPhase);
             if (robot.isWalking) {
+                if (robot.walkPhase == 0) {
+                    robot.walkPhase = 1
+                }
+
                 robot.walkCount += 0.5
                 if (robot.walkCount > 10) {
                     robot.walkCount = 0
@@ -147,9 +148,18 @@ define(function (require) {
         bottomYellow = new Facade.Image( 'blender_images/fruit_2_blended1.png', {anchor: 'center'});
         bottomGreen = new Facade.Image( 'blender_images/fruit_1_blended1.png', {anchor: 'center'});
 
-        function drawLeg (stage, leg, x, y, multi, backLeg, jumpCount, walkPhase, walkCount) {
+        function drawLeg (stage, leg, x, y, multi, backLeg, jumpCount, walkCount, walkPhase, middle) {
             leg.x = x
             leg.y = y
+
+
+            if (middle && walkPhase != 0) {
+                walkPhase = walkPhase + 1
+
+                if (walkPhase > phaseTotal) {
+                    walkPhase = 1
+                }
+            }
 
             // top joint ()
             var aX = leg.x
@@ -159,22 +169,13 @@ define(function (require) {
             }
 
             // top leg ====
-            var bX = leg.x - 5 + (jumpCount*0.5)
+            var bX = leg.x - 5 + (jumpCount * 0.5)
             var bY = leg.y + (jumpCount * 2.0)
             var bRotate = (jumpCount*5) + 50 * multi
             if (backLeg) {
                 bX = leg.x - 5 + (jumpCount*0.1*multi)
                 bY = leg.y + (jumpCount * 2.8)
                 bRotate = (jumpCount*5 * multi) + 50 * multi
-            }
-            if (walkPhase > 0) {
-                console.log("weee!");
-
-                // if (walkPhase) {
-                    
-                // }
-                // bX = 
-                // bY = 
             }
 
             // knee ()
@@ -183,8 +184,27 @@ define(function (require) {
             
             // bottom leg ===>
             var cX = leg.x - 30 * multi
-            var cY = leg.y + 35
+            var cY = leg.y + 20
             var cRotate = 10 * multi
+            if (backLeg) {
+                cX = leg.x - 22 * multi
+            }
+            if (walkPhase > 0) {
+                if (walkPhase == 1) {
+                    if (backLeg) {
+                        cRotate = 10 * multi + (walkCount * -4)
+                    } else {
+                        cRotate = 20 * multi + ((10-walkCount) * -4)
+                    }
+                } else if (walkPhase == 2) {
+                    if (backLeg) {
+                        cRotate = 10 * multi + ((10-walkCount) * -4)
+                    } else {
+                        cRotate = 20 * multi + (walkCount * -4)
+                    }
+                } 
+            }
+
             
             if (backLeg) {
                 stage.addToStage(leg.bodyJoint, { x: aX , y: aY});
@@ -200,8 +220,6 @@ define(function (require) {
         }
 
         robot.draw = function (stage) {
-
-
             var pos = this.getPosition(),
             rotate = this.body.getOption('rotate');
 
@@ -214,18 +232,18 @@ define(function (require) {
             var walkPhase = robot.walkPhase
 
             // back
-            drawLeg(stage, leg1, pos.x + 40, pos.y + 55, -1, true, robot.jumpCount, walkCount, walkPhase)
-            drawLeg(stage, leg2, pos.x + 25, pos.y + 50, -1, true, robot.jumpCount, walkCount, walkPhase)
-            drawLeg(stage, leg1, pos.x + 10, pos.y + 45, -1, true, robot.jumpCount, walkCount, walkPhase)
+            drawLeg(stage, leg1, pos.x + 40, pos.y + 55, -1, true, robot.jumpCount, walkCount, walkPhase, false)
+            drawLeg(stage, leg2, pos.x + 25, pos.y + 50, -1, true, robot.jumpCount, walkCount, walkPhase, true)
+            drawLeg(stage, leg1, pos.x + 10, pos.y + 45, -1, true, robot.jumpCount, walkCount, walkPhase, false)
             
             stage.addToStage(robot.img, { x: pos.x - 5, y: robotY, rotate: rotate });
             stage.addToStage(bottomOrange, { x: pos.x - 4, y: pos.y + robot.jumpCount*2.5})
             stage.addToStage(bottomYellow, { x: pos.x - 6, y: pos.y - 25 + robot.jumpCount*2.5})
             stage.addToStage(bottomGreen, { x: pos.x - 8, y: pos.y - 50 + robot.jumpCount*2.5})
 
-            drawLeg(stage, leg1, pos.x - 40, pos.y + 50, 1, false, robot.jumpCount, walkCount, walkPhase)
-            drawLeg(stage, leg2, pos.x - 25, pos.y + 55, 1, false, robot.jumpCount, walkCount, walkPhase)
-            drawLeg(stage, leg1, pos.x - 10, pos.y + 60, 1, false, robot.jumpCount, walkCount, walkPhase)
+            drawLeg(stage, leg1, pos.x - 40, pos.y + 50, 1, false, robot.jumpCount, walkCount, walkPhase, false)
+            drawLeg(stage, leg2, pos.x - 25, pos.y + 55, 1, false, robot.jumpCount, walkCount, walkPhase, true)
+            drawLeg(stage, leg1, pos.x - 10, pos.y + 60, 1, false, robot.jumpCount, walkCount, walkPhase, false)
         };
 
         // returns true if order was delivered
@@ -240,10 +258,6 @@ define(function (require) {
                 // order did not match
                 return false;
             }
-        };
-
-        robot.watchFruits = function(fruits) {
-            console.log(fruits);
         };
 
         return robot;
