@@ -26,6 +26,7 @@ define(function (require) {
     var world = new Facade.Entity().Box2D('createWorld', { canvas: game.stage.canvas, gravity: [ 0, 30 ] });
 
     var truck = TruckEntity(world);
+    var RESPAWN_RAMP = 0;
 
     var startingTruckPlatformPos = truck.entities.platform.getOption('y');
 
@@ -133,7 +134,7 @@ define(function (require) {
         }
 
         // create a new order occasioanlly if there is room
-        if (!((game.currentTick - 180) % 600)) orders.createOrder();
+        if (!((game.currentTick - 180) % (600 - RESPAWN_RAMP))) orders.createOrder();
 
         // create a fruit occasionally of there are less than MAX_FRUIT
         // make sure new fruit helps make orderes possible
@@ -196,7 +197,7 @@ define(function (require) {
                     });
 
                     // deliver an order
-                    player1.deliverOrder(orders);
+                    if (player1.deliverOrder(orders) && RESPAWN_RAMP < 380) RESPAWN_RAMP += 20;
 
                 } else if (e.type === 'hold' && e.button === 'd_pad_left') {
 

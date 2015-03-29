@@ -55,7 +55,7 @@ define(function (require) {
 
     Order.prototype.cleanup = function () {
 
-        if (ORDER_WAIT_TIME > MIN_WAIT_TIME) ORDER_WAIT_TIME -= 1000;
+        if (ORDER_WAIT_TIME > MIN_WAIT_TIME) ORDER_WAIT_TIME -= 1500;
     };
 
     // if passed fruits are same as this.fruits, return true
