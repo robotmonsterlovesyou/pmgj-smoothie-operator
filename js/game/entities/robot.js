@@ -34,6 +34,7 @@ define(function (require) {
 
         robot.fruits = [];
         robot.score = 0;
+        robot.failures = 0;
 
         robot.collidingFruits = []
 

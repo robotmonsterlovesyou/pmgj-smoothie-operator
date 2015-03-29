@@ -3,6 +3,7 @@ define(function (require) {
     'use strict';
 
     var Order = require('./order');
+    var ui = require('./entities/ui');
 
     function OrderManager() {
 
@@ -55,7 +56,7 @@ console.log('Order ' + id + ' fulfilled! ' + points + ' points');
         for (var key = 0; key < keys.length; key += 1) {
             if (this.orders[keys[key]].isExpired()) {
                 // kill off customer
-
+                delete this.orders[keys[key]];
                 // make the robot lose one life with the result
                 return true;
             }

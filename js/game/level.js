@@ -88,6 +88,11 @@ define(function (require) {
         player1.checkFruits(fruits);
         player1.update();
 
+        if (orders.checkExpired()) {
+            player1.failures += 1;
+            ui.setLivesUsed(player1.failures);
+        }
+
         if (!(game.currentTick % bumpTick)) {
 
             bumpTick = truck.bump();
