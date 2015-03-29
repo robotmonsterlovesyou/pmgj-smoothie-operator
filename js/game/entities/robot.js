@@ -86,8 +86,9 @@ define(function (require) {
 
         robot.addFruit = function(fruitType) {
             if (robot.fruits.length < 3) {
-                robot.fruits.push(fruitType);
+                return robot.fruits.push(fruitType);
             }
+            return false;
         }
 
         robot.flushFruits = function (leaveSpill) {
