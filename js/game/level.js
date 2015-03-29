@@ -6,6 +6,7 @@ define(function (require) {
     require('facadejs-Box2D-plugin');
 
     var game = require('./game');
+    var pause = require('./pause');
 
     var FruitEntity = require('./entities/fruit');
     var TruckEntity = require('./entities/truck');
@@ -123,7 +124,12 @@ define(function (require) {
 
                 e = controller.queue.shift();
 
-                if (e.type === 'press' && e.button === 'button_1') {
+                if (e.type === 'release' && e.button === 'start') {
+
+                    controller.queue = [];
+                    game.pushState(pause);
+
+                } else if (e.type === 'press' && e.button === 'button_1') {
                     player1.startJump()
 
                 } else if (e.type === 'release' && e.button === 'button_1') {
@@ -205,6 +211,14 @@ define(function (require) {
         player1.draw(game.stage, platformY);
 
         game.stage.addToStage(ui.entities.group);
+
+    });
+
+    state.pause(function () {
+
+        controller.pause();
+
+        ui.setPausedState();
 
     });
 

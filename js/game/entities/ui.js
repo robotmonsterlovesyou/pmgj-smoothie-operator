@@ -6,6 +6,8 @@ define(function (require) {
 
     var group = new Facade.Group();
 
+    var pausedBackground = document.createElement('img');
+
     var score = new Facade.Text('0 points', {
         x: 20,
         y: game.stage.height() - 20,
@@ -35,6 +37,16 @@ define(function (require) {
             group: group,
             score: score,
             time: time
+        },
+        setPausedState: function () {
+
+            pausedBackground.setAttribute('src', game.stage.exportBase64('image/png', 100));
+
+        },
+        getPausedState: function () {
+
+            return pausedBackground;
+
         }
     };
 
