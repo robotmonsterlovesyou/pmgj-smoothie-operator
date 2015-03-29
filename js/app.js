@@ -4,6 +4,6 @@ define(function (require) {
         title = require('./game/title'),
         level = require('./game/level');
 
-    game.start(level);
+    game.start(title);
 
 });
