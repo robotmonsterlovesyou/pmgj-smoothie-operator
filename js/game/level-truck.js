@@ -130,11 +130,13 @@ define(function (require) {
 
                     player1.collidingFruits.forEach(function (fruit) {
 
-                        fruit.body.Box2D('destroyObject');
+                        if (player1.addFruit(fruit.type))
 
-                        player1.addFruit(fruit.type);
+                            fruit.body.Box2D('destroyObject');
 
-                        fruits.splice(fruits.indexOf(fruit), 1);
+                            fruits.splice(fruits.indexOf(fruit), 1);
+
+                        }
                     });
 
                 } else if (e.type === 'press' && e.button === 'button_3') {
