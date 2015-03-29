@@ -122,7 +122,13 @@ define(function (require) {
 
                 } else if (e.type === 'press' && e.button === 'button_3') {
 
-                    alert('blend');
+                    player1.collidingFruits.forEach(function (fruit) {
+
+                        fruit.body.Box2D('destroyObject');
+
+                        fruits.splice(fruits.indexOf(fruit), 1);
+
+                    });
 
                 } else if (e.type === 'hold' && e.button === 'd_pad_left') {
 
