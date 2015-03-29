@@ -130,7 +130,7 @@ define(function (require) {
 
                     player1.collidingFruits.forEach(function (fruit) {
 
-                        if (player1.addFruit(fruit.type))
+                        if (player1.addFruit(fruit.type)) {
 
                             fruit.body.Box2D('destroyObject');
 
