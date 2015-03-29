@@ -103,6 +103,9 @@ define(function (require) {
         }
 
         var phaseTotal = 2
+
+        robot.imgShadow = new Facade.Image('blender_images/blender_shadow.png', { anchor: 'center' });
+
         robot.walking = false
         robot.walkCount = 0
         robot.walkPhase = 0
@@ -206,7 +209,7 @@ define(function (require) {
                     } else {
                         cRotate = 20 * multi + (walkCount * -4)
                     }
-                } 
+                }
             }
 
             if (backLeg) {
@@ -222,7 +225,8 @@ define(function (require) {
             }
         }
 
-        robot.draw = function (stage) {
+        robot.draw = function (stage, shadowY) {
+
             var pos = this.getPosition(),
             rotate = this.body.getOption('rotate');
 
@@ -237,6 +241,9 @@ define(function (require) {
             if (robot.collidingFruits.length > 0) {
                 stage.addToStage(fruitHighlight, { x: pos.x - 5, y: robotY, rotate: rotate });
             }
+
+            // shadow
+            stage.addToStage(this.imgShadow, { x: pos.x, y: shadowY, scale: 1 - (shadowY - pos.y) / shadowY * 0.7 });
 
             // back
             drawLeg(stage, leg1, pos.x + 10, pos.y + 45, -1, true, robot.jumpCount, walkCount, walkPhase, false)
