@@ -43,7 +43,7 @@ define(function (require) {
         this.orders[id].customer.setSatisfied();
         setTimeout((function (id) {
             slurpSFX[Math.round(Math.random() * (slurpSFX.length -1))].play().on('end', (function (id) {
-                delete this.orders[id];
+                this.orders[id].customer.state.cleanup = true;
             }).bind(this, id));
         }).bind(this, id), 500);
 
@@ -93,6 +93,18 @@ define(function (require) {
                 delete this.orders[keys[key]];
                 // make the robot lose one life with the result
                 return true;
+            }
+        }
+        return false;
+    };
+
+    OrderManager.prototype.runCleanup = function () {
+
+        var keys = Object.keys(this.orders);
+        for (var key = 0; key < keys.length; key += 1) {
+            if (this.orders[keys[key]].customer.state.cleanup !== undefined) {
+                // kill off customer
+                delete this.orders[keys[key]];
             }
         }
         return false;

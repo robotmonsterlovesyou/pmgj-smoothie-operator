@@ -124,6 +124,8 @@ define(function (require) {
             ui.setLivesUsed(player1.failures);
         }
 
+        orders.runCleanup();
+
         if (!(game.currentTick % bumpTick)) {
 
             bumpTick = truck.bump();
