@@ -149,6 +149,10 @@ define(function (require) {
 
                 } else if (e.type === 'press' && e.button === 'button_2') {
 
+                    player1.flushFruits(true);
+
+                } else if (e.type === 'press' && e.button === 'button_3') {
+
                     player1.collidingFruits.forEach(function (fruit) {
 
                         if (player1.addFruit(fruit.type)) {
@@ -159,10 +163,6 @@ define(function (require) {
 
                         }
                     });
-
-                } else if (e.type === 'press' && e.button === 'button_3') {
-
-                    player1.flushFruits(true);
 
                 } else if (e.type === 'hold' && e.button === 'd_pad_left') {
 
