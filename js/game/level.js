@@ -30,14 +30,14 @@ define(function (require) {
 
     var bumpTick = truck.bump();
 
-    var CATEGORY_ROBOT = 0x0001;  // 0000000000000001 in binary
+    var CATEGORY_ROBOT = 0x0001; // 0000000000000001 in binary
     var CATEGORY_FRUIT = 0x0002; // 0000000000000010 in binary
     var CATEGORY_WALLS = 0x0004; // 0000000000000100 in binary
-    var CATEGORY_STUBS = 0x0008; // 0000000000000100 in binary
-    var MASK_ROBOT = CATEGORY_WALLS | CATEGORY_ROBOT; // or ~CATEGORY_PLAYER
-    var MASK_FRUIT = CATEGORY_WALLS | CATEGORY_FRUIT; // or ~CATEGORY_MONSTER
-    var MASK_WALLS = CATEGORY_ROBOT | CATEGORY_FRUIT | CATEGORY_WALLS;
-    var MASK_STUBS = CATEGORY_WALLS;
+    var CATEGORY_STUBS = 0x0008; // 0000000000001000 in binary
+    var MASK_ROBOT = CATEGORY_WALLS | CATEGORY_ROBOT;
+    var MASK_FRUIT = CATEGORY_WALLS | CATEGORY_FRUIT; 
+    var MASK_WALLS = CATEGORY_ROBOT | CATEGORY_FRUIT | CATEGORY_WALLS | CATEGORY_STUBS;
+    var MASK_STUBS = CATEGORY_WALLS | CATEGORY_STUBS;
 
     var MAX_LIVES = 3;
 
@@ -49,8 +49,8 @@ define(function (require) {
     }
 
     function addStubFiltering(wall) {
-        wall._box2d.entity.GetFixtureList().m_filter.categoryBits = CATEGORY_WALLS;
-        wall._box2d.entity.GetFixtureList().m_filter.maskBits = MASK_WALLS;
+        wall._box2d.entity.GetFixtureList().m_filter.categoryBits = CATEGORY_STUBS;
+        wall._box2d.entity.GetFixtureList().m_filter.maskBits = MASK_STUBS;
     }
 
     function createFruit(fruitType) {
