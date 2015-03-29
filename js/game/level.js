@@ -191,12 +191,13 @@ define(function (require) {
                 } else if (e.type === 'hold' && e.button === 'stick_axis_left') {
 
                     if (e.value[0] < -0.5) {
-
                         player1.setVelocity(-10, null);
+                        player1.walkLeft()
+
 
                     } else if (e.value[0] > 0.5) {
-
                         player1.setVelocity(10, null);
+                        player1.walkRight()
 
                     }
 
