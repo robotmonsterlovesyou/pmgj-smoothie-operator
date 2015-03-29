@@ -26,12 +26,19 @@ define(function (require) {
         }
     };
 
+    // if passed fruits are same as this.fruits, return true
     Order.prototype.check = function (fruits) {
 
-        // if passed fruits are same as this.fruits, return true
+        var keys = Object.keys(this.fruits),
+            orderTypes = [];
+        for (var key = 0; key < keys.length; key += 1) {
+            orderTypes.push(this.fruits[keys[key]].type);
+        }
+
+        orderTypes.sort();
         fruits.sort();
-        this.fruits.sort();
-        if (JSON.stringify(fruits) === JSON.stringify(this.fruits)) return true;
+
+        if (JSON.stringify(orderTypes) === JSON.stringify(fruits)) return true;
         else return false;
     };
 

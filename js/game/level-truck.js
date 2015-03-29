@@ -106,6 +106,9 @@ define(function (require) {
 
         }
 
+        // deliver an order
+        player1.deliverOrder(orders);
+
         player1.resetWalking()
 
         if (controller.queue.length) {

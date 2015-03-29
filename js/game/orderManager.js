@@ -25,7 +25,6 @@ define(function (require) {
             var newKey = Math.floor(Math.random() * availableKeys.length);
             this.orders[availableKeys[newKey]] = new Order(availableKeys[newKey]);
         }
-        console.log(available, this.orders);
     };
 
     OrderManager.prototype._fulfillOrder = function (id) {
@@ -38,8 +37,12 @@ console.log('Order ' + id + ' fulfilled!');
 
         var keys = Object.keys(this.orders);
         for (var key = 0; key < keys.length; key += 1) {
-            if (order.check(fruits)) this._fulfillOrder(keys[key]);
+            if (this.orders[keys[key]].check(fruits)) {
+                this._fulfillOrder(keys[key]);
+                return true;
+            }
         }
+        return false;
     };
 
     OrderManager.prototype.keepOrdersPossible = function () {
