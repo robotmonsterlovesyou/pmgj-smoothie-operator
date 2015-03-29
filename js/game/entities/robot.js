@@ -22,6 +22,9 @@ define(function (require) {
         new Howl({ urls: ['./sfx/blender_footstep_03.mp3'], volume: 0.25 })
     ];
 
+    var jumpPrepareSFX = new Howl({ urls: ['./sfx/jump_prepare.mp3'], volume: 0.5 });
+    var jumpReleaseSFX = new Howl({ urls: ['./sfx/jump_release.mp3'], volume: 0.5 });
+
     function Robot(world, options) {
 
         var FRUIT_RADIUS = 27
@@ -77,6 +80,7 @@ define(function (require) {
 
         robot.startJump = function() {
             if (robot.getPosition().y > 440) {
+                jumpPrepareSFX.play();
                 robot.jumping = true;
                 robot.jumpCanFinish = false;
             }
@@ -173,6 +177,7 @@ define(function (require) {
             }
 
             if (robot.jumping == false && robot.jumpCanFinish == true && robot.jumpCount == JUMP_MAX) {
+                jumpReleaseSFX.play();
                 robot.setVelocity(null, -18);
                 robot.jumpCanFinish = false;
                 robot.jumpCount = 0;
