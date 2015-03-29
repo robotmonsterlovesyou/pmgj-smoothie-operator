@@ -13,6 +13,7 @@ define(function (require) {
 
     var OrderManager = require('./orderManager');
 
+    var ui = require('./entities/ui');
     var splashes = require('./entities/splashes');
 
     var state = new Plastick.State('level');
@@ -80,6 +81,8 @@ define(function (require) {
     state.update(function () {
 
         var e;
+
+        ui.entities.time.setText(ui.entities.time.value.replace(/[0-9]+/, Math.round(game.gameTime() / 1000)));
 
         player1.checkFruits(fruits);
         player1.update();
@@ -198,7 +201,10 @@ define(function (require) {
         fruits.map(function (fruit) {
             fruit.draw(game.stage, platformY);
         });
+
         player1.draw(game.stage, platformY);
+
+        game.stage.addToStage(ui.entities.group);
 
     });
 
