@@ -93,6 +93,8 @@ define(function (require) {
 
         if (this.customer.state.satisfied) {
 
+            game.stage.addToStage(this.customer.entities.points, { y: '+=' + offset.y });
+
             game.stage.addToStage(this.customer.entities.victory, { y: '+=' + offset.y });
 
         } else {

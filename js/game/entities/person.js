@@ -62,12 +62,21 @@ define(function (require) {
                 fontSize: 35,
                 fillStyle: '#f33',
                 textAlignment: 'center'
+            }),
+            points = new Facade.Text('0', {
+                x: 95,
+                y: 20,
+                fontFamily: 'Passion One',
+                fontSize: 35,
+                fillStyle: '#333',
+                textAlignment: 'center'
             });
 
         face.setOptions(options);
         arms.setOptions(options);
         victory.setOptions(options);
         timer.setOptions(options);
+        points.setOptions(options);
 
         face.play();
 
@@ -82,7 +91,8 @@ define(function (require) {
                 face: face,
                 arms: arms,
                 victory: victory,
-                timer: timer
+                timer: timer,
+                points: points
             },
 
             drawFace: function(stage, y) {

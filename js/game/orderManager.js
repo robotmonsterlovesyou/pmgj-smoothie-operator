@@ -41,6 +41,7 @@ define(function (require) {
         var points = this.orders[id].getPointValue();
         console.log('Order ' + id + ' fulfilled! ' + points + ' points');
         this.orders[id].customer.setSatisfied();
+        this.orders[id].customer.entities.points.setText(points);
 
         setTimeout((function (id) {
             this.orders[id].customer.state.cleanup = true;
