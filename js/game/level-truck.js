@@ -71,7 +71,7 @@ define(function (require) {
     var fruitTypes = ['apple', 'orange', 'banana', 'strawberry', 'blueberry'];
     var fruits = [];
 
-    var player1 = new RobotEntity(world, {x: 500, y:100});
+    var player1 = new RobotEntity(world, {x: 500, y: 465});
     player1.body._box2d.entity.GetFixtureList().m_filter.categoryBits = CATEGORY_ROBOT;
     player1.body._box2d.entity.GetFixtureList().m_filter.maskBits = MASK_ROBOT;
 
