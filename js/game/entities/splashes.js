@@ -16,11 +16,17 @@ define(function (require) {
         entities: {
             splashes: splashes,
         },
-        addSplash: function (position, fruits) {
+        addSplash: function (x, fruits) {
+
+            var y = 520 + (Math.random() * 24 - 12);
 
             splashes._objects = splashes._objects.slice(-99);
 
-            splashes.addToGroup(new Facade.Image(images[fruits[0]], { x: position, y: 520 + (Math.random() * 24 - 12), anchor: 'center' }));
+            fruits.forEach(function (fruit) {
+
+                splashes.addToGroup(new Facade.Image(images[fruit], { x: x, y: y, anchor: 'center' }));
+
+            });
 
         }
     };
