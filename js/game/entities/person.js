@@ -54,11 +54,20 @@ define(function (require) {
 
         var face = new Facade.Image(data[id].face.image, data[id].face.options),
             arms = new Facade.Image(data[id].arms.image, data[id].arms.options),
-            victory = new Facade.Image(data[id].victory.image, data[id].victory.options);
+            victory = new Facade.Image(data[id].victory.image, data[id].victory.options),
+            timer = new Facade.Text('60', {
+                x: 95,
+                y: 20,
+                fontFamily: 'Passion One',
+                fontSize: 35,
+                fillStyle: '#f33',
+                textAlignment: 'center'
+            });
 
         face.setOptions(options);
         arms.setOptions(options);
         victory.setOptions(options);
+        timer.setOptions(options);
 
         face.play();
 
@@ -72,7 +81,8 @@ define(function (require) {
             entities: {
                 face: face,
                 arms: arms,
-                victory: victory
+                victory: victory,
+                timer: timer
             },
 
             drawFace: function(stage, y) {

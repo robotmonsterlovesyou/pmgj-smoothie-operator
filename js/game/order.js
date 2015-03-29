@@ -75,7 +75,8 @@ define(function (require) {
     };
 
     Order.prototype.beforeTruckDraw = function (stage, offset) {
-        this.customer.drawFace(stage, offset.y)
+        this.customer.entities.timer.setText(Math.floor((this.timestamp + this.waitTime - window.performance.now()) / 1000));
+        this.customer.drawFace(stage, offset.y);
 
     };
 
@@ -89,6 +90,12 @@ define(function (require) {
                 { x: 30, y: 30 },
                 { x: -40, y: 10 },
             ];
+
+        if (parseFloat(this.customer.entities.timer.value) <= 10) {
+
+            game.stage.addToStage(this.customer.entities.timer, { y: '+=' + offset.y });
+
+        }
 
         if (this.customer.state.satisfied) {
 
