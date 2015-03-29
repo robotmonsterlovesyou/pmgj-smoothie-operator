@@ -1,8 +1,8 @@
 define(function (require) {
 
     var game = require('./game/game'),
-        intro = require('./game/intro'),
-        level = require('./game/level-truck');
+        title = require('./game/title'),
+        level = require('./game/level');
 
     game.start(level);
 
