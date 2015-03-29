@@ -10,6 +10,7 @@ define(function (require) {
     var FruitEntity = require('./entities/fruit');
     var TruckEntity = require('./entities/truck');
     var RobotEntity = require('./entities/robot');
+    var PersonEntity = require('./entities/person');
 
     var state = new Plastick.State('level');
 
@@ -18,6 +19,10 @@ define(function (require) {
     var world = new Facade.Entity().Box2D('createWorld', { canvas: game.stage.canvas, gravity: [ 0, 30 ] });
 
     var truck = TruckEntity(world);
+
+    var person1 = PersonEntity(0, { x: '+=' + 100 });
+    var person2 = PersonEntity(1, { x: '+=' + 360 });
+    var person3 = PersonEntity(2, { x: '+=' + 620 });
 
     var startingTruckPlatformPos = truck.entities.platform.getOption('y');
 
@@ -143,15 +148,23 @@ define(function (require) {
 
         world.Box2D('step');
 
-        world.Box2D('drawDebug');
+        // world.Box2D('drawDebug');
 
         var shadowY = truck.entities.platform.getOption('y');
 
         game.stage.clear();
 
+        game.stage.addToStage(person1.entities.face, { y: '-=' + (startingTruckPlatformPos - shadowY) });
+        game.stage.addToStage(person3.entities.face, { y: '-=' + (startingTruckPlatformPos - shadowY) });
+        game.stage.addToStage(person2.entities.face, { y: '-=' + (startingTruckPlatformPos - shadowY) });
+
         game.stage.addToStage(truck.entities.background, {
-            y: -(startingTruckPlatformPos - shadowY)
+            y: '-=' + (startingTruckPlatformPos - shadowY)
         });
+
+        game.stage.addToStage(person1.entities.arms, { y: '-=' + (startingTruckPlatformPos - shadowY) });
+        game.stage.addToStage(person3.entities.arms, { y: '-=' + (startingTruckPlatformPos - shadowY) });
+        game.stage.addToStage(person2.entities.arms, { y: '-=' + (startingTruckPlatformPos - shadowY) });
 
         // game.stage.clear();
         fruits.map(function (fruit) {
