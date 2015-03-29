@@ -128,6 +128,7 @@ define(function (require) {
 
                         fruits.splice(fruits.indexOf(fruit), 1);
 
+                        player1.addFruit(fruit.type)
                     });
 
                 } else if (e.type === 'hold' && e.button === 'd_pad_left') {

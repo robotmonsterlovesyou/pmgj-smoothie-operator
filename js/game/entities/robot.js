@@ -23,7 +23,7 @@ define(function (require) {
             }
         );
 
-        robot.fruits = ['banana', 'blueberry'];
+        robot.fruits = [];
 
         robot.collidingFruits = []
 
@@ -79,10 +79,10 @@ define(function (require) {
             robot.isWalking = true
         }
 
-        robot.blendFruit = function() {
-            robot.collidingFruits.forEach(function(fruit) {
-                // HERE
-            });
+        robot.addFruit = function(fruitType) {
+            if (robot.fruits.length < 3) {
+                robot.fruits.push(fruitType);
+            }
         }
 
         robot.img = new Facade.Image( 'blender_images/blender_body.png', { anchor: 'center' });
@@ -147,9 +147,11 @@ define(function (require) {
         }
 
         // blended fruits in blender
+        bottomRed = new Facade.Image( 'blender_images/fruit_1_blended1.png', {anchor: 'center'});
+        bottomGreen = new Facade.Image( 'blender_images/fruit_2_blended1.png', {anchor: 'center'});
         bottomOrange = new Facade.Image( 'blender_images/fruit_3_blended1.png', {anchor: 'center'});
-        bottomYellow = new Facade.Image( 'blender_images/fruit_2_blended1.png', {anchor: 'center'});
-        bottomGreen = new Facade.Image( 'blender_images/fruit_1_blended1.png', {anchor: 'center'});
+        bottomYellow = new Facade.Image( 'blender_images/fruit_4_blended1.png', {anchor: 'center'});
+        bottomBlue = new Facade.Image( 'blender_images/fruit_5_blended1.png', {anchor: 'center'});
 
         fruitHighlight = new Facade.Image( 'blender_images/blender_highlight.png', {anchor: 'center'});
         
@@ -225,6 +227,20 @@ define(function (require) {
             }
         }
 
+        function getSmoothie(fruitName) {
+            if (fruitName == "strawberry") {
+                return bottomRed;
+            } else if (fruitName == "apple") {
+                return bottomGreen;
+            } else if (fruitName == "orange") {
+                return bottomOrange;
+            } else if (fruitName == "banana") {
+                return bottomYellow;
+            } else if (fruitName == "blueberry") {
+                return bottomBlue
+            }
+        }
+
         robot.draw = function (stage, shadowY) {
 
             var pos = this.getPosition(),
@@ -251,9 +267,18 @@ define(function (require) {
             drawLeg(stage, leg1, pos.x + 40, pos.y + 55, -1, true, robot.jumpCount, walkCount, walkPhase, false)
             
             stage.addToStage(robot.img, { x: pos.x - 5, y: robotY, rotate: rotate });
-            stage.addToStage(bottomOrange, { x: pos.x - 4, y: pos.y + robot.jumpCount*2.5})
-            stage.addToStage(bottomYellow, { x: pos.x - 6, y: pos.y - 25 + robot.jumpCount*2.5})
-            stage.addToStage(bottomGreen, { x: pos.x - 8, y: pos.y - 50 + robot.jumpCount*2.5})
+
+            if (robot.fruits[0]) {
+                stage.addToStage(getSmoothie(robot.fruits[0]), { x: pos.x - 4, y: pos.y + robot.jumpCount*2.5})
+            }
+
+            if (robot.fruits[1]) {
+                stage.addToStage(getSmoothie(robot.fruits[1]), { x: pos.x - 6, y: pos.y - 25 + robot.jumpCount*2.5})
+            }
+
+            if (robot.fruits[2]) {
+                stage.addToStage(getSmoothie(robot.fruits[2]), { x: pos.x - 8, y: pos.y - 50 + robot.jumpCount*2.5})
+            }
 
             drawLeg(stage, leg1, pos.x - 40, pos.y + 50, 1, false, robot.jumpCount, walkCount, walkPhase, false)
             drawLeg(stage, leg2, pos.x - 25, pos.y + 55, 1, false, robot.jumpCount, walkCount, walkPhase, true)
