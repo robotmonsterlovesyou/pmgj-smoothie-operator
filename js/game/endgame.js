@@ -15,7 +15,8 @@ define(function (require) {
 
     var greyout = new Facade.Rect({ width: game.stage.width(), height: game.stage.height(), fillStyle: '#fff', opacity: 50 });
 
-    var peptalk;
+    var peptalk,
+        intructions;
 
     if (window.devicePixelRatio) {
 
@@ -33,7 +34,15 @@ define(function (require) {
             fontFamily: 'Passion One',
             fontSize: 50,
             fillStyle: '#333',
-            anchor: 'top/left',
+            textAlignment: 'center'
+        });
+
+        intructions = new Facade.Text('Press Space or A (Xbox Controller) to try your luck again.', {
+            y: 350,
+            width: game.stage.width(),
+            fontFamily: 'Passion One',
+            fontSize: 30,
+            fillStyle: '#333',
             textAlignment: 'center'
         });
 
@@ -66,7 +75,8 @@ define(function (require) {
         game.stage.clear();
         game.stage.addToStage(background);
         game.stage.addToStage(greyout);
-        game.stage.addToStage(peptalk, { width: game.stage.width() });
+        game.stage.addToStage(peptalk);
+        game.stage.addToStage(intructions);
 
     });
 
