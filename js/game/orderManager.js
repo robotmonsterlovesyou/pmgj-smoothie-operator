@@ -13,6 +13,8 @@ define(function (require) {
         new Howl({ urls: ['./sfx/slurp_03.mp3'], volume: 1 })
     ];
 
+    var timeout;
+
     function OrderManager() {
 
         this.orders = [];
@@ -41,7 +43,8 @@ define(function (require) {
         var points = this.orders[id].getPointValue();
         console.log('Order ' + id + ' fulfilled! ' + points + ' points');
         this.orders[id].customer.setSatisfied();
-        setTimeout((function (id) {
+        clearTimeout(timeout);
+        timeout = setTimeout((function (id) {
             slurpSFX[Math.round(Math.random() * (slurpSFX.length -1))].play().on('end', (function (id) {
                 this.orders[id].customer.state.cleanup = true;
             }).bind(this, id));
