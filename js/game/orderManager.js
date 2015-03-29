@@ -40,13 +40,14 @@ define(function (require) {
 
         var self = this,
             points = self.orders[id].getPointValue();
-console.log('Order ' + id + ' fulfilled! ' + points + ' points');
-        self.orders[id].customer.satisfied = true;
+        console.log('Order ' + id + ' fulfilled! ' + points + ' points');
+        this.orders[id].customer.setSatisfied();
         setTimeout(function () {
             slurpSFX[Math.round(Math.random() * (slurpSFX.length -1))].play().on('end', function () {
                 delete self.orders[id];
             });
         }, 500);
+
         return points;
     };
 

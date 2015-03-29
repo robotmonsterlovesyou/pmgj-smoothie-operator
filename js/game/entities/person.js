@@ -62,11 +62,36 @@ define(function (require) {
 
         face.play();
 
+        var state = {
+            faceCount: 200,
+            satisfied: false
+        }
+
         return {
+            state: state,
             entities: {
                 face: face,
                 arms: arms,
                 victory: victory
+            },
+
+            drawFace: function(stage, y) {
+                var newY = y
+
+                if (state.satisfied == null || state.satisfied == false) {
+                    state.faceCount = Math.max(0, state.faceCount - 8)
+                    newY = (y + state.faceCount)
+                } else {
+                    // state.faceCount = Math.max(0, state.faceCount - 2)
+                    // newY = (y + (200 - state.faceCount))
+                }
+
+                stage.addToStage(face, {y: "+=" + newY});
+            },
+
+            setSatisfied: function() {
+                state.satisfied = true;
+                state.faceCount = 200;
             }
         };
 
