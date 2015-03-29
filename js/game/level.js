@@ -158,9 +158,6 @@ define(function (require) {
 
         }
 
-        // deliver an order
-        player1.deliverOrder(orders);
-
         player1.resetWalking()
 
         if (controller.queue.length) {
@@ -171,8 +168,8 @@ define(function (require) {
 
                 if (e.type === 'release' && e.button === 'start') {
 
-                    game.pushState(pause);
                     controller.queue = [];
+                    game.pushState(pause);
                     return;
 
                 } else if (e.type === 'press' && e.button === 'button_1') {
@@ -197,6 +194,9 @@ define(function (require) {
 
                         }
                     });
+
+                    // deliver an order
+                    player1.deliverOrder(orders);
 
                 } else if (e.type === 'hold' && e.button === 'd_pad_left') {
 

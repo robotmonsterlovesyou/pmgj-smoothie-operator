@@ -25,6 +25,7 @@ define(function (require) {
         // esc key to unpause
         if (e.keyCode === 27) {
             e.preventDefault();
+            controller.queue = [];
             this.popState();
         }
     }.bind(game));
@@ -32,7 +33,6 @@ define(function (require) {
     state.init(function (game) {
 
         controller.resume();
-
         state.data.pause = window.performance.now();
     });
 
