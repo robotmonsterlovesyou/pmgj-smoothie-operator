@@ -31,7 +31,10 @@ define(function (require) {
 
         var points = this.orders[id].getPointValue();
 console.log('Order ' + id + ' fulfilled! ' + points + ' points');
-        delete this.orders[id];
+        this.orders[id].customer.satisfied = true;
+        setTimeout((function () {
+            delete this.orders[id];
+        }).bind(this), 1500);
         return points;
     };
 
