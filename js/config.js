@@ -7,7 +7,7 @@ require.config({
         'facadejs-Box2D-plugin': '../bower_components/facadejs-Box2D-plugin/facadejs-Box2D',
         'gamepad': '../bower_components/gamepad.js/gamepad.min',
         'howler': '../bower_components/howler.js/howler.min',
-        'plastick': '../bower_components/plastick.js/plastick.min',
+        'plastick': '../bower_components/plastick.js/plastick',
         'TWEEN': '../bower_components/tween.js/build/tween.min'
     },
     shim: {

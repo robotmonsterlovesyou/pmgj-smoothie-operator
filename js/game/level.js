@@ -82,11 +82,13 @@ define(function (require) {
 
     var orders = new OrderManager();
 
-    state.update(function () {
+    state.update(function (game) {
 
         var e;
 
-        ui.entities.time.setText(ui.entities.time.value.replace(/[0-9]+/, Math.round(game.gameTime() / 1000)));
+        ui.entities.time.setText(ui.entities.time.value.replace(/[0-9]+/,
+            (Math.floor((game.gameTime() - game.data.pauseTime) / 1000))
+        ));
 
         /*
         truck.entities.clouds.forEach(function (cloud) {
@@ -156,6 +158,7 @@ define(function (require) {
 
                     controller.queue = [];
                     game.pushState(pause);
+                    return;
 
                 } else if (e.type === 'press' && e.button === 'button_1') {
                     player1.startJump()
@@ -211,7 +214,7 @@ define(function (require) {
 
     });
 
-    state.draw(function () {
+    state.draw(function (game) {
 
         world.Box2D('step');
 
@@ -243,7 +246,7 @@ define(function (require) {
 
     });
 
-    state.pause(function () {
+    state.pause(function (game) {
 
         controller.pause();
 

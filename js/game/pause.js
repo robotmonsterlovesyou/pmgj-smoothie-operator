@@ -18,12 +18,31 @@ define(function (require) {
     if (window.devicePixelRatio) {
 
         background.setOptions({ scale: 0.5 });
-
     }
 
-    state.update(function () {
+    state.registerListener(document, 'keydown', function (e) {
 
-        var e;
+        // esc key to unpause
+        if (e.keyCode === 27) {
+            e.preventDefault();
+            this.popState();
+        }
+    }.bind(game));
+
+    state.init(function (game) {
+
+        state.data.pause = window.performance.now();
+    });
+
+    state.cleanup(function (game) {
+
+        game.data.pauseTime += window.performance.now() - state.data.pause ;
+        console.log(game.data.pauseTime);
+    });
+
+    state.update(function (game) {
+
+        /*var e;
 
         if (controller.queue.length) {
 
@@ -35,16 +54,17 @@ define(function (require) {
 
                     controller.queue = [];
                     game.popState();
+                    return;
 
                 }
 
             }
 
-        }
+        }*/
 
     });
 
-    state.draw(function () {
+    state.draw(function (game) {
 
         game.stage.clear();
         game.stage.addToStage(background);
