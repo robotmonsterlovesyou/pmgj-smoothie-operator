@@ -100,8 +100,8 @@ define(function (require) {
 
         }
 
-        player1.resetWalking() 
-        
+        player1.resetWalking()
+
         if (controller.queue.length) {
 
              while (controller.queue.length) {
