@@ -32,20 +32,25 @@ define(function (require) {
         }
     };
 
-    Order.prototype.getWaitTime = function() {
+    Order.prototype.getWaitTime = function () {
 
         return this.waitTime;
     };
 
-    Order.prototype.getMinWaitTime = function() {
+    Order.prototype.getMinWaitTime = function () {
 
         return MIN_WAIT_TIME;
     };
 
-    Order.prototype.getPointValue = function() {
+    Order.prototype.isExpired = function () {
+
+        return (this.timestamp + this.waitTime) < window.performance.now();
+    };
+
+    Order.prototype.getPointValue = function () {
 
         var points = Math.floor((this.timestamp + this.waitTime - window.performance.now()) / 1000) * 10;
-        return points > 0 ? points : 0;
+        return points > 0 ? points : -1;
     };
 
     Order.prototype.cleanup = function () {

@@ -43,7 +43,21 @@ console.log('Order ' + id + ' fulfilled! ' + points + ' points');
                 return this._fulfillOrder(keys[key]);
             }
         }
-        return 0;
+        return -1;
+    };
+
+    OrderManager.prototype.checkExpired = function () {
+
+        var keys = Object.keys(this.orders);
+        for (var key = 0; key < keys.length; key += 1) {
+            if (this.orders[keys[key]].isExpired()) {
+                // kill off customer
+
+                // make the robot lose one life with the result
+                return true;
+            }
+        }
+        return false;
     };
 
     OrderManager.prototype.keepOrdersPossible = function () {

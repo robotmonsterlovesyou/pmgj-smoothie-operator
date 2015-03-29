@@ -302,7 +302,7 @@ define(function (require) {
         robot.deliverOrder = function(orders) {
 
             var points = orders.checkOrders(robot.fruits);
-            if (points > 0) {
+            if (points !== -1) {
                 // order matched and delivered
                 robot.score += points;
                 ui.entities.score.setText(ui.entities.score.value.replace(/[0-9]+/, robot.score));
