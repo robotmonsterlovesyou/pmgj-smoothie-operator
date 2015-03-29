@@ -12,7 +12,7 @@ define(function (require) {
     var imgBubble = new Facade.Image('blender_images/patrons_bubble.png', { anchor: 'center' }),
         imgHighlight = new Facade.Image('blender_images/fruit_highlights.png', { anchor: 'center' });
 
-    var ORDER_WAIT_TIME = 60000;
+    var ORDER_WAIT_TIME = 45000;
     var MIN_WAIT_TIME = 10000;
 
     function Order(number) {
@@ -55,7 +55,7 @@ define(function (require) {
 
     Order.prototype.cleanup = function () {
 
-        ORDER_WAIT_TIME -= 3000;
+        if (ORDER_WAIT_TIME > MIN_WAIT_TIME) ORDER_WAIT_TIME -= 1000;
     };
 
     // if passed fruits are same as this.fruits, return true

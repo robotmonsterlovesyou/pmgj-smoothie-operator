@@ -45,11 +45,11 @@ define(function (require) {
 
         setTimeout((function (id) {
             this.orders[id].customer.state.cleanup = true;
-        }).bind(this, id), 500);
+        }).bind(this, id), 1000);
 
         setTimeout(function () {
             slurpSFX[Math.round(Math.random() * (slurpSFX.length -1))].play();
-        }, 500);
+        }, 1000);
 
         return points;
     };
