@@ -143,15 +143,18 @@ define(function (require) {
             }
         }
 
+        // blended fruits in blender
         bottomOrange = new Facade.Image( 'blender_images/fruit_3_blended1.png', {anchor: 'center'});
         bottomYellow = new Facade.Image( 'blender_images/fruit_2_blended1.png', {anchor: 'center'});
         bottomGreen = new Facade.Image( 'blender_images/fruit_1_blended1.png', {anchor: 'center'});
 
+        fruitHighlight = new Facade.Image( 'blender_images/blender_highlight.png', {anchor: 'center'});
+        
         function drawLeg (stage, leg, x, y, multi, backLeg, jumpCount, walkCount, walkPhase, middle) {
             leg.x = x
             leg.y = y
 
-
+            // middle leg on opposite step
             if (middle && walkPhase != 0) {
                 walkPhase = walkPhase + 1
 
@@ -207,10 +210,10 @@ define(function (require) {
             }
 
             if (backLeg) {
-                stage.addToStage(leg.bodyJoint, { x: aX , y: aY});
                 stage.addToStage(leg.bottom, { x: cX, y: cY, rotate: cRotate});
                 stage.addToStage(leg.legJoint, { x: dX, y: dY});
                 stage.addToStage(leg.top, { x: bX, y: bY, rotate: bRotate});
+                stage.addToStage(leg.bodyJoint, { x: aX , y: aY});
             } else {
                 stage.addToStage(leg.bodyJoint, { x: aX , y: aY});
                 stage.addToStage(leg.top, { x: bX, y: bY, rotate: bRotate});
@@ -231,10 +234,14 @@ define(function (require) {
             var walkCount = robot.walkCount
             var walkPhase = robot.walkPhase
 
+            if (robot.collidingFruits.length > 0) {
+                stage.addToStage(fruitHighlight, { x: pos.x - 5, y: robotY, rotate: rotate });
+            }
+
             // back
-            drawLeg(stage, leg1, pos.x + 40, pos.y + 55, -1, true, robot.jumpCount, walkCount, walkPhase, false)
-            drawLeg(stage, leg2, pos.x + 25, pos.y + 50, -1, true, robot.jumpCount, walkCount, walkPhase, true)
             drawLeg(stage, leg1, pos.x + 10, pos.y + 45, -1, true, robot.jumpCount, walkCount, walkPhase, false)
+            drawLeg(stage, leg2, pos.x + 25, pos.y + 50, -1, true, robot.jumpCount, walkCount, walkPhase, true)
+            drawLeg(stage, leg1, pos.x + 40, pos.y + 55, -1, true, robot.jumpCount, walkCount, walkPhase, false)
             
             stage.addToStage(robot.img, { x: pos.x - 5, y: robotY, rotate: rotate });
             stage.addToStage(bottomOrange, { x: pos.x - 4, y: pos.y + robot.jumpCount*2.5})
