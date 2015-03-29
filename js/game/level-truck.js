@@ -12,6 +12,8 @@ define(function (require) {
     var RobotEntity = require('./entities/robot');
     var PersonEntity = require('./entities/person');
 
+    var OrderManager = require('./orderManager');
+
     var state = new Plastick.State('level');
 
     var controller = require('./controller')(state);
@@ -58,13 +60,13 @@ define(function (require) {
     var fruitTypes = ['apple', 'orange', 'banana', 'strawberry', 'blueberry'];
     var fruits = [];
 
-    fruits.push(FruitEntity(world, 'apple', { x: 200, y: 130 }));
-    fruits.push(FruitEntity(world, 'orange', { x: 300, y: 100 }));
-    fruits.push(FruitEntity(world, 'banana', { x: 400, y: 120 }));
-    fruits.push(FruitEntity(world, 'banana', { x: 500, y: 80 }));
-    fruits.push(FruitEntity(world, 'strawberry', { x: 600, y: 80 }));
-    fruits.push(FruitEntity(world, 'blueberry', { x: 700, y: 100 }));
-    fruits.push(FruitEntity(world, 'apple', { x: 800, y: 100 }));
+    fruits.push(FruitEntity(world, '', { x: 200, y: 130 }));
+    fruits.push(FruitEntity(world, '', { x: 300, y: 100 }));
+    fruits.push(FruitEntity(world, '', { x: 400, y: 120 }));
+    fruits.push(FruitEntity(world, '', { x: 500, y: 80 }));
+    fruits.push(FruitEntity(world, '', { x: 600, y: 80 }));
+    fruits.push(FruitEntity(world, '', { x: 700, y: 100 }));
+    fruits.push(FruitEntity(world, '', { x: 800, y: 100 }));
 
     fruits.forEach(function(fruit) {
         fruit.body._box2d.entity.GetFixtureList().m_filter.categoryBits = CATEGORY_FRUIT
@@ -74,6 +76,10 @@ define(function (require) {
     var player1 = new RobotEntity(world, {x: 500, y:100});
     player1.body._box2d.entity.GetFixtureList().m_filter.categoryBits = CATEGORY_ROBOT
     player1.body._box2d.entity.GetFixtureList().m_filter.maskBits = MASK_ROBOT
+
+    var orders = new OrderManager();
+    orders.createOrder();
+    orders.createOrder();
 
     state.update(function () {
 
@@ -100,8 +106,8 @@ define(function (require) {
 
         }
 
-        player1.resetWalking() 
-        
+        player1.resetWalking()
+
         if (controller.queue.length) {
 
              while (controller.queue.length) {
@@ -116,7 +122,13 @@ define(function (require) {
 
                 } else if (e.type === 'press' && e.button === 'button_3') {
 
-                    alert('blend');
+                    player1.collidingFruits.forEach(function (fruit) {
+
+                        fruit.body.Box2D('destroyObject');
+
+                        fruits.splice(fruits.indexOf(fruit), 1);
+
+                    });
 
                 } else if (e.type === 'hold' && e.button === 'd_pad_left') {
 
@@ -154,25 +166,26 @@ define(function (require) {
 
         // world.Box2D('drawDebug');
 
-        var shadowY = truck.entities.platform.getOption('y');
+        var platformY = truck.entities.platform.getOption('y');
 
         game.stage.clear();
 
-        game.stage.addToStage(person1.entities.face, { y: '-=' + (startingTruckPlatformPos - shadowY) });
-        game.stage.addToStage(person3.entities.face, { y: '-=' + (startingTruckPlatformPos - shadowY) });
-        game.stage.addToStage(person2.entities.face, { y: '-=' + (startingTruckPlatformPos - shadowY) });
+        game.stage.addToStage(person1.entities.face, { y: '-=' + (startingTruckPlatformPos - platformY) });
+        game.stage.addToStage(person3.entities.face, { y: '-=' + (startingTruckPlatformPos - platformY) });
+        game.stage.addToStage(person2.entities.face, { y: '-=' + (startingTruckPlatformPos - platformY) });
 
         game.stage.addToStage(truck.entities.background, {
-            y: '-=' + (startingTruckPlatformPos - shadowY)
+            y: '-=' + (startingTruckPlatformPos - platformY)
         });
 
-        game.stage.addToStage(person1.entities.arms, { y: '-=' + (startingTruckPlatformPos - shadowY) });
-        game.stage.addToStage(person3.entities.arms, { y: '-=' + (startingTruckPlatformPos - shadowY) });
-        game.stage.addToStage(person2.entities.arms, { y: '-=' + (startingTruckPlatformPos - shadowY) });
+        game.stage.addToStage(person1.entities.arms, { y: '-=' + (startingTruckPlatformPos - platformY) });
+        game.stage.addToStage(person3.entities.arms, { y: '-=' + (startingTruckPlatformPos - platformY) });
+        game.stage.addToStage(person2.entities.arms, { y: '-=' + (startingTruckPlatformPos - platformY) });
 
-        // game.stage.clear();
+        orders.draw(game.stage, platformY - startingTruckPlatformPos);
+
         fruits.map(function (fruit) {
-            fruit.draw(game.stage, shadowY);
+            fruit.draw(game.stage, platformY);
         });
         player1.draw(game.stage);
 

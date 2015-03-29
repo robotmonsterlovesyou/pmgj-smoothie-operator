@@ -110,7 +110,6 @@ define(function (require) {
         var JUMP_MAX = 10
 
         robot.update = function() {
-
             if (robot.isWalking) {
                 if (robot.walkPhase == 0) {
                     robot.walkPhase = 1
@@ -123,7 +122,7 @@ define(function (require) {
                     robot.walkPhase += 1
                     if (robot.walkPhase > phaseTotal) {
                         robot.walkPhase = 1
-                    } 
+                    }
                 }
             } else {
                 robot.walkPhase = 0
@@ -181,14 +180,16 @@ define(function (require) {
             // knee ()
             var dX = leg.x - 25 * multi
             var dY = leg.y + 20
-            
+
             // bottom leg ===>
             var cX = leg.x - 30 * multi
             var cY = leg.y + 20
             var cRotate = 10 * multi
+
             if (backLeg) {
                 cX = leg.x - 22 * multi
             }
+
             if (walkPhase > 0) {
                 if (walkPhase == 1) {
                     if (backLeg) {
@@ -205,17 +206,16 @@ define(function (require) {
                 } 
             }
 
-            
             if (backLeg) {
                 stage.addToStage(leg.bodyJoint, { x: aX , y: aY});
                 stage.addToStage(leg.bottom, { x: cX, y: cY, rotate: cRotate});
-                stage.addToStage(leg.legJoint, { x: dX, y: dY}); 
+                stage.addToStage(leg.legJoint, { x: dX, y: dY});
                 stage.addToStage(leg.top, { x: bX, y: bY, rotate: bRotate});
             } else {
                 stage.addToStage(leg.bodyJoint, { x: aX , y: aY});
                 stage.addToStage(leg.top, { x: bX, y: bY, rotate: bRotate});
                 stage.addToStage(leg.bottom, { x: cX, y: cY, rotate: cRotate});
-                stage.addToStage(leg.legJoint, { x: dX, y: dY}); 
+                stage.addToStage(leg.legJoint, { x: dX, y: dY});
             }
         }
 

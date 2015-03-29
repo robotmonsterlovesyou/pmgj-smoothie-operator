@@ -18,6 +18,16 @@ define(function (require) {
 
         controller.queue = [];
 
+        controller.setCustomMapping('keyboard', {
+            'button_1': 32,
+            'button_3': 13,
+            'start': 27,
+            'd_pad_up': [38, 87],
+            'd_pad_down': [40, 83],
+            'd_pad_left': [37, 65],
+            'd_pad_right': [39, 68]
+        });
+
         controller.on('hold', buttons, function (e) {
 
             controller.queue.push(e);

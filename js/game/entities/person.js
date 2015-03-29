@@ -14,6 +14,10 @@ define(function (require) {
             arms: {
                 image: './blender_images/people_arms2.png',
                 options: { x: 0, y: 170 }
+            },
+            victory: {
+                image: './blender_images/people_arms2_victory.png',
+                options: { x: -90, y: -57 }
             }
         },
         {
@@ -24,6 +28,10 @@ define(function (require) {
             arms: {
                 image: './blender_images/people_arms1.png',
                 options: { x: 0, y: 170 }
+            },
+            victory: {
+                image: './blender_images/people_arms1_victory.png',
+                options: { x: -110, y: -57 }
             }
         },
         {
@@ -34,6 +42,10 @@ define(function (require) {
             arms: {
                 image: './blender_images/people_arms2.png',
                 options: { x: 0, y: 170 }
+            },
+            victory: {
+                image: './blender_images/people_arms2_victory.png',
+                options: { x: -110, y: -57 }
             }
         }
     ]
@@ -41,17 +53,20 @@ define(function (require) {
     function Person (id, options) {
 
         var face = new Facade.Image(data[id].face.image, data[id].face.options),
-            arms = new Facade.Image(data[id].arms.image, data[id].arms.options);
+            arms = new Facade.Image(data[id].arms.image, data[id].arms.options),
+            victory = new Facade.Image(data[id].victory.image, data[id].victory.options);
 
         face.setOptions(options);
         arms.setOptions(options);
+        victory.setOptions(options);
 
         face.play();
 
         return {
             entities: {
                 face: face,
-                arms: arms
+                arms: arms,
+                victory: victory
             }
         };
 

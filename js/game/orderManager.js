@@ -1,6 +1,8 @@
-(function () {
+define(function (require) {
 
     'use strict';
+
+    var Order = require('./order');
 
     function OrderManager() {
 
@@ -11,14 +13,15 @@
 
     OrderManager.prototype.createOrder = function () {
 
-        if (this.orders.length < this.ordersMax) {
-            this.orders.push(new Order(Math.random() * 3 + 1));
+        if (this.orders.length < this.orderMax) {
+            this.orders.push(new Order(2));
         }
+console.log(this);
     };
 
     OrderManager.prototype._fulfillOrder = function (id) {
 
-        this.orders.splice();
+        //this.orders.splice();
     };
 
     OrderManager.prototype.checkOrders = function (fruits) {
@@ -32,11 +35,12 @@
         // make sure there are active fruits for the current orders
     }
 
-    OrderManager.prototype.draw = function (stage) {
+    OrderManager.prototype.draw = function (stage, truckOffset) {
 
-        var keys = Object.keys(this.orders);
+        var offset = { x: 390, y: 100 + truckOffset },
+            keys = Object.keys(this.orders);
         for (var i = 0; i < keys.length; i += 1) {
-            orders[i].draw(stage, this.orderMax);
+            this.orders[i].draw(stage, offset);
         }
     };
 
