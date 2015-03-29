@@ -25,6 +25,8 @@ define(function (require) {
     var jumpPrepareSFX = new Howl({ urls: ['./sfx/jump_prepare.mp3'], volume: 0.5 });
     var jumpReleaseSFX = new Howl({ urls: ['./sfx/jump_release.mp3'], volume: 0.5 });
 
+    var flushSFX = new Howl({ urls: ['./sfx/flush.mp3'], volume: 0.5 });
+
     function Robot(world, options) {
 
         var FRUIT_RADIUS = 27
@@ -113,6 +115,7 @@ define(function (require) {
         robot.flushFruits = function (leaveSpill) {
             if (leaveSpill && robot.fruits.length) {
                 splashes.addSplash(robot.fObject.getOption('x'), robot.fruits);
+                flushSFX.play();
             }
             robot.fruits = [];
         };
