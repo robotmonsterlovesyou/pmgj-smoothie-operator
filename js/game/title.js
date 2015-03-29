@@ -39,7 +39,7 @@ define(function (require) {
 
                 e = controller.queue.shift();
 
-                if (e.type === 'press' && e.button === 'button_1') {
+                if (e.type === 'release' && e.button === 'button_1') {
 
                     game.changeState(howtoplay);
 
