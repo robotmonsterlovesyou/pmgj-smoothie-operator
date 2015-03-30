@@ -13,7 +13,7 @@ define(function (require) {
         imgHighlight = new Facade.Image('blender_images/fruit_highlights.png', { anchor: 'center' });
 
     var ORDER_WAIT_TIME = 45000;
-    var MIN_WAIT_TIME = 10000;
+    var MIN_WAIT_TIME = 15000;
 
     function Order(number) {
 

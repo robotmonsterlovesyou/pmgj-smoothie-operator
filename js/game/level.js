@@ -92,7 +92,6 @@ define(function (require) {
         backgroundSFX.fadeIn(0.5, 2000);
         ambienceSFX.fadeIn(1.0, 2000);
 
-        game.data.pauseTime = 0;
         controller.resume();
     });
 

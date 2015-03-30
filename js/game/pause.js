@@ -38,7 +38,7 @@ define(function (require) {
 
     state.cleanup(function (game) {
 
-        game.data.pauseTime += window.performance.now() - state.data.pause ;
+        game.data.pauseTime += window.performance.now() - state.data.pause;
     });
 
     state.update(function (game) {

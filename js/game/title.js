@@ -29,6 +29,17 @@ define(function (require) {
 
     var splashScreen = new Facade.Image('./blender_images/hero.png', { y: 80 });
 
+    state.init(function (game) {
+
+        controller.resume();
+        state.data.pause = window.performance.now();
+    });
+
+    state.cleanup(function (game) {
+
+        game.data.pauseTime += window.performance.now() - state.data.pause;
+    });
+
     state.update(function (game) {
 
         var e;

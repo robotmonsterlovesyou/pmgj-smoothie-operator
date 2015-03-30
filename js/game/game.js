@@ -12,6 +12,8 @@ define(function (require) {
 
     stage.resizeForHDPI();
 
+    game.data.pauseTime = 0;
+
     return game;
 
 });
