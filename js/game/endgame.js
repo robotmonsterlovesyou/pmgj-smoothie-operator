@@ -18,7 +18,7 @@ define(function (require) {
     var peptalk,
         intructions;
 
-    if (window.devicePixelRatio) {
+    if (window.devicePixelRatio == 2) {
 
         background.setOptions({ scale: 0.5 });
 
