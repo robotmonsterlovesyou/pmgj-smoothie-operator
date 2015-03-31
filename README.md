@@ -2,7 +2,7 @@
 
 ![](blender_images/hero.png)
 
-> In the not-so distant future where food trucks are in such high demand that they needed to take to the skys, people do whatever they can to place orders for smoothies. Whether it's by jetpack, grappling hooks or their natural ability to fly, people are placing a lot of orders. Your job, as this flying food truck only robotic blender, is to fulfill as many orders as you can before too many customers get angry and leave.
+> In the not-so distant future where food trucks are in such high demand that they needed to take to the skys, people do whatever they can to place orders for smoothies. Whether it's by jetpack, grappling hooks or their natural ability to fly, people are placing a lot of orders. Your job, as this flying food truck's only robotic blender, is to fulfill as many orders as you can before too many customers get angry and leave.
 
 ## Credits
 
