@@ -163,7 +163,7 @@ define(function (require) {
             } else if (robot.isOffGround) {
                 robot.isOffGround = false
 
-                // SCOTT, PLAY LAND SOUND HERE
+                landedSFX[Math.round(Math.random() * (landedSFX.length -1))].play();
             }
 
             if (robot.isOffGround == false && robot.isWalking && !robot.jumping && !(game.currentTick % 13)) {
