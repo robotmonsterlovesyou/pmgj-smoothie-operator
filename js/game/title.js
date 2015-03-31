@@ -40,7 +40,7 @@ define(function (require) {
         game.data.pauseTime += window.performance.now() - state.data.pause;
     });
 
-    state.registerListener(document, 'release', function (e) {
+    state.registerListener(document, 'keydown', function (e) {
 
         if (!e.metaKey) {
 
@@ -60,7 +60,7 @@ define(function (require) {
 
                 e = controller.queue.shift();
 
-                if (e.type === 'press' && e.button.match(/^button/)) {
+                if (e.type === 'release' && e.button.match(/^button/)) {
 
                     game.changeState(howtoplay);
 
