@@ -11,18 +11,10 @@ define(function (require) {
 
     var controller = require('./controller')(state);
 
-    var background = new Facade.Image(ui.getPausedState());
-
     var greyout = new Facade.Rect({ width: game.stage.width(), height: game.stage.height(), fillStyle: '#fff', opacity: 50 });
 
     var peptalk,
         intructions;
-
-    if (window.devicePixelRatio == 2) {
-
-        background.setOptions({ scale: 0.5 });
-
-    }
 
     state.init(function () {
 
@@ -73,7 +65,7 @@ define(function (require) {
     state.draw(function () {
 
         game.stage.clear();
-        game.stage.addToStage(background);
+        game.stage.context.drawImage(ui.getPausedState(), 0, 0, game.stage.width(), game.stage.height());
         game.stage.addToStage(greyout);
         game.stage.addToStage(peptalk);
         game.stage.addToStage(intructions);

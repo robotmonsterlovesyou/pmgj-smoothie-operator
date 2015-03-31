@@ -15,11 +15,6 @@ define(function (require) {
 
     var greyout = new Facade.Rect({ width: game.stage.width(), height: game.stage.height(), fillStyle: '#fff', opacity: 50 });
 
-    if (window.devicePixelRatio) {
-
-        background.setOptions({ scale: 0.5 });
-    }
-
     state.registerListener(document, 'keydown', function (e) {
 
         // esc key to unpause
@@ -68,7 +63,7 @@ define(function (require) {
     state.draw(function (game) {
 
         game.stage.clear();
-        game.stage.addToStage(background);
+        game.stage.context.drawImage(ui.getPausedState(), 0, 0, game.stage.width(), game.stage.height());
         game.stage.addToStage(greyout);
 
     });
