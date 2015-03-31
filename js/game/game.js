@@ -8,7 +8,7 @@ define(function (require) {
 
     game.TARGET_TPS = 60;
 
-    game.setDebug(true);
+    // game.setDebug(true);
 
     stage.resizeForHDPI();
 
