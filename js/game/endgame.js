@@ -29,7 +29,7 @@ define(function (require) {
             textAlignment: 'center'
         });
 
-        intructions = new Facade.Text('Press Space or A (Xbox Controller) to try your luck again.', {
+        intructions = new Facade.Text('Press anything to try your luck again.', {
             y: 350,
             width: game.stage.width(),
             fontFamily: 'Passion One',
@@ -40,7 +40,17 @@ define(function (require) {
 
     });
 
-    state.update(function () {
+    state.registerListener(document, 'keydown', function (e) {
+
+        if (!e.metaKey) {
+
+            window.location.reload();
+
+        }
+
+    });
+
+    state.update(function (game) {
 
         var e;
 
@@ -50,7 +60,7 @@ define(function (require) {
 
                 e = controller.queue.shift();
 
-                if (e.type === 'press' && e.button === 'button_1') {
+                if (e.type === 'release' && e.button.match(/^button/)) {
 
                     window.location.reload();
 
