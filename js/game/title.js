@@ -40,7 +40,7 @@ define(function (require) {
         game.data.pauseTime += window.performance.now() - state.data.pause;
     });
 
-    state.registerListener(document, 'keydown', function (e) {
+    state.registerListener(document, 'release', function (e) {
 
         if (!e.metaKey) {
 
