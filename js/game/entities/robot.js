@@ -85,6 +85,7 @@ define(function (require) {
         robot.jumpCount = 0;
         robot.jumpCanFinish = false
 
+
         robot.startJump = function() {
             if (robot.getPosition().y > 440) {
                 jumpPrepareSFX.play();
@@ -150,11 +151,22 @@ define(function (require) {
         robot.walkCount = 0
         robot.walkPhase = 0
 
+        robot.isOffGround = false
+
         var JUMP_MAX = 10
 
         robot.update = function() {
 
-            if (robot.isWalking && !robot.jumping && !(game.currentTick % 13)) {
+            // if the robot off the ground?
+            if (robot.getPosition().y < 440) {
+                robot.isOffGround = true
+            } else if (robot.isOffGround) {
+                robot.isOffGround = false
+
+                // SCOTT, PLAY LAND SOUND HERE
+            }
+
+            if (robot.isOffGround == false && robot.isWalking && !robot.jumping && !(game.currentTick % 13)) {
                 footstepSFX[Math.round(Math.random() * (footstepSFX.length -1))].play();
             }
 
