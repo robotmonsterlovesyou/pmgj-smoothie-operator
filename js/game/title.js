@@ -18,7 +18,7 @@ define(function (require) {
         fillStyle: '#333'
     });
 
-    var intructions = new Facade.Text('Press Space or A (Xbox Controller) to become a Smoothie Operator!', {
+    var intructions = new Facade.Text('Press anything to become a Smoothie Operator!', {
         x: 600,
         y: 210,
         width: 400,
@@ -40,6 +40,16 @@ define(function (require) {
         game.data.pauseTime += window.performance.now() - state.data.pause;
     });
 
+    state.registerListener(document, 'keydown', function (e) {
+
+        if (!e.metaKey) {
+
+            game.changeState(howtoplay);
+
+        }
+
+    });
+
     state.update(function (game) {
 
         var e;
@@ -50,7 +60,7 @@ define(function (require) {
 
                 e = controller.queue.shift();
 
-                if (e.type === 'release' && e.button === 'button_1') {
+                if (e.type === 'press' && e.button.match(/^button/)) {
 
                     game.changeState(howtoplay);
 

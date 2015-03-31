@@ -21,21 +21,21 @@ define(function (require) {
         controller.resume();
         state.data.pause = window.performance.now();
 
-        intructions = new Facade.Text('Press Space or A (Xbox Controller) to continue.', {
-            x: 0,
-            y: 475,
-            width: game.stage.width(),
-            fontFamily: 'Helvetica',
-            fontSize: 25,
-            fillStyle: '#fff',
-            textAlignment: 'center'
-        });
-
     });
 
     state.cleanup(function (game) {
 
         game.data.pauseTime += window.performance.now() - state.data.pause;
+    });
+
+    state.registerListener(document, 'keydown', function (e) {
+
+        if (!e.metaKey) {
+
+            game.changeState(level);
+
+        }
+
     });
 
     state.update(function (game) {
@@ -48,7 +48,7 @@ define(function (require) {
 
                 e = controller.queue.shift();
 
-                if (e.type === 'release' && e.button === 'button_1') {
+                if (e.type === 'press' && e.button.match(/^button/)) {
 
                     game.changeState(level);
 
@@ -64,7 +64,6 @@ define(function (require) {
 
         game.stage.clear();
         game.stage.addToStage(background);
-        game.stage.addToStage(intructions);
 
     });
 
