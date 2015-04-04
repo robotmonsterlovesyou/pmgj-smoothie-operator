@@ -15,27 +15,17 @@ body {
     font-family: 'Helvetica', 'Arial', sans-serif;
     font-size: 1em;
     line-height: 1.3em;
-    display: -webkit-flex;
-    display: -moz-flex;
-    display: -ms-flex;
-    display: flex;
-    -webkit-align-items: center;
-    -moz-align-items: center;
-    -ms-align-items: center;
-    align-items: center;
-    -webkit-justify-content: center;
-    -moz-justify-content: center;
-    -ms-justify-content: center;
-    justify-content: center;
 }
 
 .stage {
-    max-width: 1024px;
-    height: 568px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 canvas {
+    margin: 0 auto;
     display: block;
-    width: 100%;
-    height: auto;
+    width: 100% !important;
+    height: 55.46875% !important;
 }
