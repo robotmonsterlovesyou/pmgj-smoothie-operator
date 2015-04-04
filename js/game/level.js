@@ -32,8 +32,8 @@ define(function (require) {
 
     var bumpTick = truck.bump();
 
-    var backgroundSFX = new Howl({ urls: ['./sfx/theme.ogg'], volume: 1.0, loop: true });
-    var ambienceSFX = new Howl({ urls: ['./sfx/ambience.ogg'], volume: 1.0, loop: true });
+    var backgroundSFX = new Howl({ urls: ['./sfx/theme.ogg', './sfx/theme.mp3'], volume: 1.0, loop: true });
+    var ambienceSFX = new Howl({ urls: ['./sfx/ambience.ogg', './sfx/ambience.mp3'], volume: 1.0, loop: true });
 
     var CATEGORY_ROBOT = 0x0001; // 0000000000000001 in binary
     var CATEGORY_FRUIT = 0x0002; // 0000000000000010 in binary
