@@ -32,6 +32,8 @@ define(function (require) {
 
         if (!e.metaKey) {
 
+            e.preventDefault();
+
             game.changeState(level);
 
         }

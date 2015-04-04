@@ -87,6 +87,16 @@ define(function (require) {
 
     var orders = new OrderManager();
 
+    state.registerListener(document, 'keydown', function (e) {
+
+        if (!e.metaKey) {
+
+            e.preventDefault();
+
+        }
+
+    });
+
     state.init(function (game) {
 
         backgroundSFX.fadeIn(0.5, 2000);
