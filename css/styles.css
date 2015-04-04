@@ -19,13 +19,19 @@ body {
 
 .stage {
     position: relative;
+    width: 100% !important;
+    padding-bottom: 55.46875% !important;
+    height: 0 !important;
     top: 50%;
     transform: translateY(-50%);
 }
 
 canvas {
-    margin: 0 auto;
-    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     width: 100% !important;
-    height: 55.46875% !important;
+    height: 100% !important;
 }
